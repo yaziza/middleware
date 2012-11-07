@@ -1,8 +1,5 @@
 # Please also refer to the svn ignore
 *.class
-*/.classpath
-*/.project
-*/.metadata
 */.settings/org.jdt.core.prefs
 *.aux
 *.toc
