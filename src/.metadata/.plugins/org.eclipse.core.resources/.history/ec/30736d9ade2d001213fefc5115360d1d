@@ -1,0 +1,37 @@
+package de.tud.in.middleware.products;
+
+import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
+import de.tud.in.middleware.dao.costumers.CostumerDAO;
+
+/**
+ * Session Bean implementation class ProductManagement
+ */
+@Stateless
+@LocalBean
+public class ProductManagement implements ProductManagementRemote, ProductManagementLocal {
+
+	@EJB 
+	CostumerDAO costumerDAO;
+	
+    /**
+     * Default constructor. 
+     */
+    public ProductManagement() {
+        // TODO Auto-generated constructor stub
+    }
+
+	@Override
+	public long getNumberOfProducts() {
+		return costumerDAO.getNumberOfCostumers();
+	}
+
+	@Override
+	public String getProductDescription(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

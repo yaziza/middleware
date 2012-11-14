@@ -1,0 +1,5 @@
+1352893490115	Rename type 'CostumerDAO'
+1352893501400	Rename type 'CostumerManagement'
+1352893523055	Rename field 'costumerDAO'
+1352893744417	Rename package 'de.tud.in.middleware.dao.costumers'
+1352893755388	Rename package 'de.tud.in.middleware.costumers'

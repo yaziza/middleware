@@ -1,0 +1,6 @@
+INDEX VERSION 1.122+/Volumes/yasser.aziza/workspace/middleware/src/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+2185226094.index
+4014154247.index
+525084746.index
+2114330758.index
+3473310331.index

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="javax.jws.WebService"/>
+<fullyQualifiedTypeName name="javax.persistence.EntityManager"/>
+<fullyQualifiedTypeName name="javax.persistence.Query"/>
+<fullyQualifiedTypeName name="javax.ejb.EJB"/>
+<fullyQualifiedTypeName name="de.tud.in.middleware.dao.costumers.CostumerDAO"/>
+<fullyQualifiedTypeName name="java.util.Formatter"/>
+<fullyQualifiedTypeName name="de.tud.in.middleware.costumers.Costumer"/>
+<fullyQualifiedTypeName name="de.tud.in.middleware.products.Product"/>
+<fullyQualifiedTypeName name="de.tud.in.middleware.dao.products.ProductDAO"/>
+</qualifiedTypeNameHistroy>

@@ -1,0 +1,3 @@
+INDEX VERSION 1.126
+/Volumes/yasser.aziza/workspace/middleware/src/.metadata/.plugins/org.eclipse.jst.jsp.core/jspsearch/974111800.index
+/OmazonWeb/src

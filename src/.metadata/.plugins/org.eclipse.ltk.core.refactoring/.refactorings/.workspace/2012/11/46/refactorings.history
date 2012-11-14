@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;com.eads.iw.protas.server.ef&apos;" deleteContents="false" description="Delete resource &apos;com.eads.iw.protas.server.ef&apos;" element1="/com.eads.iw.protas.server.ef" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1352834357790"/>
+</session>

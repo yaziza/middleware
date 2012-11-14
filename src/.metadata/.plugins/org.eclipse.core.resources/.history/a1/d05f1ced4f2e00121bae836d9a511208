@@ -1,0 +1,13 @@
+package de.tud.in.middleware.costumers;
+
+import javax.ejb.Remote;
+
+@Remote
+public interface CostumerManagementRemote {
+
+	public long getNumberOfCustomers();
+	
+	public String getCostumerName(long id);
+	
+	public void addCustomer(String name);
+}
