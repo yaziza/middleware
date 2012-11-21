@@ -7,13 +7,11 @@ import javax.persistence.*;
 
 /**
  * Entity implementation class for Entity: Product
- *
+ * 
  */
 @Entity
-
 public class Product implements Serializable {
 
-	   
 	@Id
 	@GeneratedValue
 	private Integer id;
@@ -22,14 +20,21 @@ public class Product implements Serializable {
 
 	public Product() {
 		super();
-	}   
+	}
+
+	public Product(String description) {
+		super();
+		this.description = description;
+	}
+	
 	public Integer getId() {
 		return this.id;
 	}
 
 	public void setId(Integer id) {
 		this.id = id;
-	}   
+	}
+
 	public String getDescription() {
 		return this.description;
 	}
@@ -37,5 +42,5 @@ public class Product implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-   
+
 }

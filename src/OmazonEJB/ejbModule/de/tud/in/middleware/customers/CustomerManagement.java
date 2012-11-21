@@ -5,26 +5,22 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 
-import de.tud.in.middleware.costumers.CustomerManagementLocal;
-import de.tud.in.middleware.costumers.CustomerManagementRemote;
 import de.tud.in.middleware.dao.customers.CustomerDAO;
 
 /**
- * Session Bean implementation class CustomerManagement
+ * Session Bean implementation class CustumerManagement
  */
 @WebService
 @Stateless
 @LocalBean
-public class CustomerManagement implements CustomerManagementRemote, CustomerManagementLocal {
+public class CustomerManagement implements CustomerManagementRemote,
+		CustomerManagementLocal {
 
-	@EJB 
+	@EJB
 	CustomerDAO customerDAO;
-    /**
-     * Default constructor. 
-     */
-    public CustomerManagement(){
-        // TODO Auto-generated constructor stub
-    }
+
+	public CustomerManagement() {
+	}
 
 	@Override
 	public long getNumberOfCustomers() {

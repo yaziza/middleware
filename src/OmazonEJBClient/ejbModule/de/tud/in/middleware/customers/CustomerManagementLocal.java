@@ -1,4 +1,4 @@
-package de.tud.in.middleware.costumers;
+package de.tud.in.middleware.customers;
 
 import javax.ejb.Local;
 

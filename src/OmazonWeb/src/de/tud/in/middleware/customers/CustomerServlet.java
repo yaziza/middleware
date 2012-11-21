@@ -12,50 +12,53 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import de.tud.in.middleware.costumers.CustomerManagementRemote;
-import de.tud.in.middleware.products.ProductManagementRemote;
-
 /**
  * Servlet implementation class CustomerServlet
  */
 @WebServlet("/CustomerServlet")
 public class CustomerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public CustomerServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Context ctx;
-		try {
-			ctx = new InitialContext();
-			CustomerManagementRemote cmr = (CustomerManagementRemote) ctx
-					.lookup("de.tud.in.middleware.costumers.CustomerManagementRemote#de.tud.in.middleware.costumers.CustomerManagementRemote");
-
-			PrintWriter pw = new PrintWriter(response.getOutputStream());
-			pw.println("<html><head><title>Customer Overview</title></head><body><h1>Cusomter Overview</h1>");
-			pw.println("<p>Anzahl Kunden: " + cmr.getNumberOfCustomers() + "</p>");
-			pw.println("</body></html>");
-			pw.flush();
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+	public CustomerServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		Context ctx;
+
+		CustomerManagementRemote cmr;
+		try {
+			ctx = new InitialContext();
+			cmr = (CustomerManagementRemote) ctx
+					.lookup("de.tud.in.middleware.customers.CustomerManagementRemote#de.tud.in.middleware.customers.CustomerManagementRemote");
+
+			PrintWriter pw = new PrintWriter(response.getOutputStream());
+			pw.println("<html><head><title>Customer Overview</title></head><body><h1>Cusomter Overview</h1>");
+			pw.println("<p>Anzahl Kunden: " + cmr.getNumberOfCustomers()
+					+ "</p>");
+			pw.println("</body></html>");
+			pw.flush();
+
+		} catch (NamingException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 	}
 

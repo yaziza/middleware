@@ -9,11 +9,11 @@
         <dependent-module archiveName="OmazonEJBClient.jar" deploy-path="/" handle="module:/resource/OmazonEJBClient/OmazonEJBClient">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="OmazonWeb.war" deploy-path="/" handle="module:/resource/OmazonWeb/OmazonWeb">
-            <dependent-object/>
+        <dependent-module archiveName="OmazonJPA.jar" deploy-path="/lib" handle="module:/resource/OmazonJPA/OmazonJPA">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="OmazonJPA.jar" deploy-path="/lib" handle="module:/resource/OmazonJPA/OmazonJPA">
+        <dependent-module archiveName="OmazonWeb.war" deploy-path="/" handle="module:/resource/OmazonWeb/OmazonWeb">
+            <dependent-object/>
             <dependency-type>uses</dependency-type>
         </dependent-module>
     </wb-module>
