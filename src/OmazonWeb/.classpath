@@ -14,6 +14,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/OmazonEJBClient"/>
-	<classpathentry kind="lib" path="/opt/eclipse/plugins/oracle.eclipse.runtime.glassfish.build3122_1.0.0/glassfish3/glassfish/lib/appserv-rt.jar"/>
+	<classpathentry kind="var" path="APPSERV_RT"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

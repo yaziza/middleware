@@ -1,6 +1,6 @@
 # Please also refer to the svn ignore
 *.class
-*/.settings/org.jdt.core.prefs
+
 *.aux
 *.toc
 *.out

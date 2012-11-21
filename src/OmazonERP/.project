@@ -5,8 +5,8 @@
 	<projects>
 		<project>OmazonEJB</project>
 		<project>OmazonEJBClient</project>
-		<project>OmazonWeb</project>
 		<project>OmazonJPA</project>
+		<project>OmazonWeb</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

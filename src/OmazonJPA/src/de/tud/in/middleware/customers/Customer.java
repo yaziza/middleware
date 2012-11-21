@@ -6,7 +6,7 @@ import java.lang.String;
 import javax.persistence.*;
 
 /**
- * Entity implementation class for Entity: Customer
+ * Entity implementation class for Entity: Costumer
  * 
  */
 @Entity
@@ -21,7 +21,7 @@ public class Customer implements Serializable {
 	public Customer() {
 		super();
 	}
-
+	
 	public Customer(String name) {
 		super();
 		this.name = name;
@@ -39,7 +39,7 @@ public class Customer implements Serializable {
 		return this.name;
 	}
 
-	public void setDescription(String name) {
+	public void setName(String name) {
 		this.name = name;
 	}
 
