@@ -5,4 +5,9 @@ import javax.ejb.Remote;
 @Remote
 public interface ProductManagementRemote {
 
+	public long getNumberOfProducts();
+
+	public String getProductDescription(long id);
+
+	public long addProduct(String description);
 }
