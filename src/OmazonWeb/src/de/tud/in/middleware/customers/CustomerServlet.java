@@ -33,29 +33,24 @@ public class CustomerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		Context ctx;
 
+		CustomerManagementRemote cmr;
 		try {
-			printContent(response);
+			ctx = new InitialContext();
+			cmr = (CustomerManagementRemote) ctx
+					.lookup("de.tud.in.middleware.customers.CustomerManagementRemote#de.tud.in.middleware.customers.CustomerManagementRemote");
+
+			PrintWriter pw = new PrintWriter(response.getOutputStream());
+			pw.println("<html><head><title>Customer Overview</title></head><body><h1>Cusomter Overview</h1>");
+			pw.println("<p>Anzahl Kunden: " + cmr.getNumberOfCustomers()
+					+ "</p>");
+			pw.println("</body></html>");
+			pw.flush();
 
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
-	}
-
-	private void printContent(HttpServletResponse response)
-			throws NamingException, IOException {
-		Context ctx;
-		CustomerManagementRemote cmr;
-		ctx = new InitialContext();
-		cmr = (CustomerManagementRemote) ctx
-				.lookup("de.tud.in.middleware.customers.CustomerManagementRemote#de.tud.in.middleware.customers.CustomerManagementRemote");
-
-		PrintWriter pw = new PrintWriter(response.getOutputStream());
-		pw.println("<html><head><title>Customer Overview</title></head><body><h1>Cusomter Overview</h1>");
-		pw.println("<p>Anzahl Kunden: " + cmr.getNumberOfCustomers()
-				+ "</p>");
-		pw.println("</body></html>");
-		pw.flush();
 	}
 
 	/**

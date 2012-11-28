@@ -53,7 +53,7 @@ public class ProductServlet extends HttpServlet {
 
 		PrintWriter pw = new PrintWriter(response.getOutputStream());
 		pw.println("<html><head><title>Product Overview</title></head><body><h1>Product Overview</h1>");
-		pw.println("<p>Anzahl Produkte: " + pmr.getNumberOfProducts() + "</p>");
+		//pw.println("<p>Anzahl Produkte: " + pmr.getNumberOfProducts() + "</p>");
 		pw.println("</body></html>");
 		pw.flush();
 	}
