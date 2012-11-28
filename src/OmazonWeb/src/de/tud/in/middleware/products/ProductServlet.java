@@ -1,4 +1,4 @@
-package de.tud.in.middleware.customers;
+package de.tud.in.middleware.products;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,17 +12,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import de.tud.in.middleware.customers.CustomerManagementRemote;
+
 /**
- * Servlet implementation class CustomerServlet
+ * Servlet implementation class ProductServlet
  */
-@WebServlet("/CustomerServlet")
-public class CustomerServlet extends HttpServlet {
+@WebServlet("/ProductServlet")
+public class ProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
-	public CustomerServlet() {
+	public ProductServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -33,7 +35,6 @@ public class CustomerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
 		try {
 			printContent(response);
 
@@ -45,15 +46,14 @@ public class CustomerServlet extends HttpServlet {
 	private void printContent(HttpServletResponse response)
 			throws NamingException, IOException {
 		Context ctx;
-		CustomerManagementRemote cmr;
+		ProductManagementRemote pmr;
 		ctx = new InitialContext();
-		cmr = (CustomerManagementRemote) ctx
-				.lookup("de.tud.in.middleware.customers.CustomerManagementRemote#de.tud.in.middleware.customers.CustomerManagementRemote");
+		pmr = (ProductManagementRemote) ctx
+				.lookup("de.tud.in.middleware.products.ProductManagementRemote#de.tud.in.middleware.products.ProductManagementRemote");
 
 		PrintWriter pw = new PrintWriter(response.getOutputStream());
-		pw.println("<html><head><title>Customer Overview</title></head><body><h1>Cusomter Overview</h1>");
-		pw.println("<p>Anzahl Kunden: " + cmr.getNumberOfCustomers()
-				+ "</p>");
+		pw.println("<html><head><title>Product Overview</title></head><body><h1>Product Overview</h1>");
+		pw.println("<p>Anzahl Produkte: " + pmr.getNumberOfProducts() + "</p>");
 		pw.println("</body></html>");
 		pw.flush();
 	}
