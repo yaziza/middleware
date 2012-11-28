@@ -16,4 +16,8 @@ public class ProductManagement implements ProductManagementRemote,
 	public ProductManagement() {
 	}
 
+	@Override
+	public long getNumberOfProducts() {
+		return 5;
+	}
 }

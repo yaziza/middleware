@@ -7,6 +7,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import de.tud.in.middleware.customers.Customer;
+import de.tud.in.middleware.order.CustomerOrder;
+import de.tud.in.middleware.products.ProductInstance;
 
 /**
  * Session Bean implementation class CustomerDAO
@@ -34,6 +36,22 @@ public class CustomerDAO {
 		Customer customer  = (Customer) entityManager.find(Customer.class, (int)id);
 		
 		return customer.getName();
+	}
+	
+	public int addOrderForCustomer(long id, CustomerOrder order) {
+		Customer customer  = (Customer) entityManager.find(Customer.class, (int)id);
+		
+		customer.getOrders().add(order);
+		
+		for(ProductInstance pi:order.getProductInstances()) {
+			entityManager.persist(pi);
+		}
+		entityManager.persist(order);
+		entityManager.persist(customer);
+		
+		entityManager.flush();
+		
+		return order.getId();
 	}
 
 	public long addCustomer(String name) {
