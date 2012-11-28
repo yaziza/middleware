@@ -31,20 +31,17 @@ public class CustomerDAO {
 	}
 
 	public String getCustomerName(long id) {
-		String format = String.format(
-				"select name from Customer name where name.id = %d", id);
-		Query query = entityManager.createQuery(format);
-		Customer customer = (Customer) query.getSingleResult();
+		Customer customer  = (Customer) entityManager.find(Customer.class, (int)id);
+		
 		return customer.getName();
 	}
 
 	public long addCustomer(String name) {
-		String format = String.format(
-				"insert into Customer (name) VALUES ('%s')", name);
-		Query query = entityManager.createNativeQuery(format);
-		query.executeUpdate();
-		// FIXME : return Customer id
-		return -2;
+		Customer customer = new Customer(name);
+		entityManager.persist(customer);
+		entityManager.flush();
+		
+		return customer.getId();
 	}
 
 }
