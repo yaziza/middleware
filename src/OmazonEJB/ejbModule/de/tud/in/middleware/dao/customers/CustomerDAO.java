@@ -33,24 +33,28 @@ public class CustomerDAO {
 	}
 
 	public String getCustomerName(long id) {
-		Customer customer  = (Customer) entityManager.find(Customer.class, (int)id);
-		
+		Customer customer = (Customer) entityManager.find(Customer.class,
+				(int) id);
+		if (customer == null)
+			return "Customer dont exist!";
+
 		return customer.getName();
 	}
-	
+
 	public int addOrderForCustomer(long id, CustomerOrder order) {
-		Customer customer  = (Customer) entityManager.find(Customer.class, (int)id);
-		
+		Customer customer = (Customer) entityManager.find(Customer.class,
+				(int) id);
+
 		customer.getOrders().add(order);
-		
-		for(ProductInstance pi:order.getProductInstances()) {
+
+		for (ProductInstance pi : order.getProductInstances()) {
 			entityManager.persist(pi);
 		}
 		entityManager.persist(order);
 		entityManager.persist(customer);
-		
+
 		entityManager.flush();
-		
+
 		return order.getId();
 	}
 
@@ -58,7 +62,7 @@ public class CustomerDAO {
 		Customer customer = new Customer(name);
 		entityManager.persist(customer);
 		entityManager.flush();
-		
+
 		return customer.getId();
 	}
 

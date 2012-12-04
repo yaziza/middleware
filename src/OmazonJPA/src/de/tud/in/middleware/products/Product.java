@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Product implements Serializable {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String description;
 	private static final long serialVersionUID = 1L;

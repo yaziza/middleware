@@ -18,8 +18,8 @@ public class ProductDAO {
 	@PersistenceContext
 	EntityManager entityManager;
 
-    public ProductDAO() {
-    }
+	public ProductDAO() {
+	}
 
 	public long getNumberOfProducts() {
 		long result;
@@ -30,20 +30,19 @@ public class ProductDAO {
 	}
 
 	public String getProductDescription(long id) {
-		String format = String.format(
-				"select description from Product description where description.id = %d", id);
-		Query query = entityManager.createQuery(format);
-		Product product = (Product) query.getSingleResult();
+		Product product = (Product) entityManager.find(Product.class, (int) id);
+		if (product == null)
+			return "Product dont exist!";
+
 		return product.getDescription();
 	}
 
 	public long addProduct(String description) {
-		String format = String.format(
-				"insert into Product (description) VALUES ('%s')", description);
-		Query query = entityManager.createNativeQuery(format);
-		query.executeUpdate();
-		// FIXME : return Product id
-		return -2;
+		Product product = new Product(description);
+		entityManager.persist(product);
+		entityManager.flush();
+		
+		return product.getId();
 	}
 
 }
