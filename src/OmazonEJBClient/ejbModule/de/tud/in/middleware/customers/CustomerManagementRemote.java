@@ -12,6 +12,5 @@ public interface CustomerManagementRemote {
 	public String getCustomerName(long id);
 
 	public long addCustomer(String name);
-	
-	public long addOrderForCustomer(CustomerOrder order, long customerId);
+
 }

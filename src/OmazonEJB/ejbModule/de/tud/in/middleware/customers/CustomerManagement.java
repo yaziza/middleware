@@ -38,11 +38,4 @@ public class CustomerManagement implements CustomerManagementRemote,
 	public long addCustomer(String name) {
 		return customerDAO.addCustomer(name);
 	}
-	
-	
-	@Override
-	public long addOrderForCustomer(CustomerOrder order, long customerId) {
-		return customerDAO.addOrderForCustomer(1, order);
-	}
-
 }
