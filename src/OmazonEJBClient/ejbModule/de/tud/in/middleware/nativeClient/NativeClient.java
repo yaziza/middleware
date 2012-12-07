@@ -1,11 +1,13 @@
 package de.tud.in.middleware.nativeClient;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import de.tud.in.middleware.customers.CustomerManagementRemote;
-import de.tud.in.middleware.order.CustomerOrder;
 import de.tud.in.middleware.order.OrderManagementRemote;
 import de.tud.in.middleware.products.ProductInstance;
 
@@ -15,22 +17,21 @@ public class NativeClient {
 	 * @throws NamingException
 	 */
 
-	public static void main(String[] args) throws NamingException {
+	public static void main(final String[] args) throws NamingException {
 
-		Context ctx = new InitialContext();
-		CustomerManagementRemote cmr = (CustomerManagementRemote) ctx
+		final Context ctx = new InitialContext();
+		final CustomerManagementRemote cmr = (CustomerManagementRemote) ctx
 				.lookup("de.tud.in.middleware.customers.CustomerManagementRemote#de.tud.in.middleware.customers.CustomerManagementRemote");
-		OrderManagementRemote omr = (OrderManagementRemote) ctx
+		final OrderManagementRemote omr = (OrderManagementRemote) ctx
 				.lookup("de.tud.in.middleware.order.OrderManagementRemote#de.tud.in.middleware.order.OrderManagementRemote");
 		System.out.println("Anzahl Kunden: " + cmr.getNumberOfCustomers());
 
-		ProductInstance pi = new ProductInstance();
+		final ProductInstance pi = new ProductInstance();
 		pi.setAmount(5);
+		final List<ProductInstance> productList = new ArrayList<ProductInstance>();
+		productList.add(pi);
 
-		CustomerOrder customerOrder = new CustomerOrder();
-		customerOrder.getProductInstances().add(pi);
-		System.out.println("Füge Kunden hinzu... " + cmr.addCustomer("Horst"));
-		System.out.println("Neue Order mit Nummer: "
-				+ omr.addOrderForCustomer(customerOrder, 1));
+		System.out.println("Fï¿½ge Kunden hinzu... " + cmr.addCustomer("Horst"));
+		System.out.println("Neue Order mit Nummer: " + omr.addOrderForCustomer(productList, 1));
 	}
 }
