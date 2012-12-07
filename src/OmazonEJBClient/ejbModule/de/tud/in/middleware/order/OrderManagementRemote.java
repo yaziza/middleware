@@ -5,9 +5,12 @@ import javax.ejb.Remote;
 @Remote
 public interface OrderManagementRemote {
 
+	/**
+	 * @return Returns ID of added order.
+	 */
 	public long addOrderForCustomer(CustomerOrder order, long customerId);
 	
-	public long changeOrderState(long orderId, OrderState newState);
+	public void changeOrderState(long orderId, OrderState newState);
 	
 	public OrderState getOrderState(long orderId);
 }

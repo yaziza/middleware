@@ -24,9 +24,8 @@ public class OrderManagement implements OrderManagementRemote, OrderManagementLo
 	}
 
 	@Override
-	public long changeOrderState(long orderId, OrderState newState) {
+	public void changeOrderState(long orderId, OrderState newState) {
 		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override
