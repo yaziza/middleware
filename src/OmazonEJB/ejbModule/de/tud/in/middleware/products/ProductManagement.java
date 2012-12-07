@@ -5,7 +5,8 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 
-import de.tud.in.middleware.dao.products.ProductDAO;
+import de.tud.in.middleware.dao.ProductDAO;
+
 
 /**
  * Session Bean implementation class ProductManagement

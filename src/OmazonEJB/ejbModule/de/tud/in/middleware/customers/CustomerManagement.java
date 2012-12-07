@@ -5,9 +5,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.jws.WebService;
 
-import de.tud.in.middleware.dao.customers.CustomerDAO;
-import de.tud.in.middleware.order.CustomerOrder;
-import de.tud.in.middleware.products.ProductInstance;
+import de.tud.in.middleware.dao.CustomerDAO;
 
 /**
  * Session Bean implementation class CustumerManagement

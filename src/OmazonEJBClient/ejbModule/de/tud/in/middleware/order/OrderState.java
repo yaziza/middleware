@@ -4,5 +4,6 @@ import java.io.Serializable;
 
 public enum OrderState implements Serializable {
 	OPEN,
-	DELIVERED
+	DISPATCHED,
+	DELIVERED;
 }

@@ -1,4 +1,4 @@
-package de.tud.in.middleware.dao.products;
+package de.tud.in.middleware.dao;
 
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
