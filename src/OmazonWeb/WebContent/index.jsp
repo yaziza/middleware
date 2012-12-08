@@ -9,6 +9,11 @@
   </head>
   <body>
     <h1>Omazon Web Shop</h1>
-    <a href="OrderProcess.jsp?customer=1">Link</a>
+    <p>Please enter your customerId</p>
+    <form action="OrderProcess.jsp" method="GET">
+    	<input type="text" name="customerId">
+    	<input type="submit" value="Continue">
+    </form>
+    
   </body>
 </html> 

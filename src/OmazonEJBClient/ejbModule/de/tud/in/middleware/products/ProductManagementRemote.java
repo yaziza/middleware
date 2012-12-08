@@ -14,4 +14,6 @@ public interface ProductManagementRemote {
 	long addProduct(String description);
 	
 	public List<Product> getProducts();
+	
+	public Product getProduct(long id);
 }

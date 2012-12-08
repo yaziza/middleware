@@ -38,6 +38,11 @@ public class ProductDAO {
 
 		return product.getDescription();
 	}
+	
+	public Product getProduct(long id) {
+		Product product = (Product) entityManager.find(Product.class, (int) id);
+		return product;
+	}
 
 	public long addProduct(String description) {
 		Product product = new Product(description);

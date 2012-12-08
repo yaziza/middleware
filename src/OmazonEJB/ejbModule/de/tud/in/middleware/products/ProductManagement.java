@@ -44,4 +44,9 @@ public class ProductManagement implements ProductManagementRemote,
 	public List<Product> getProducts() {
 		return productDAO.getProducts();
 	}
+	
+	@Override
+	public Product getProduct(long id) {
+		return productDAO.getProduct(id);
+	}
 }
