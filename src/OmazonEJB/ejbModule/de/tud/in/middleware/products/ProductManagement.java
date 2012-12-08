@@ -1,5 +1,7 @@
 package de.tud.in.middleware.products;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -36,5 +38,10 @@ public class ProductManagement implements ProductManagementRemote,
 	@Override
 	public long addProduct(String description) {
 		return productDAO.addProduct(description);
+	}
+
+	@Override
+	public List<Product> getProducts() {
+		return productDAO.getProducts();
 	}
 }

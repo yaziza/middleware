@@ -5,9 +5,10 @@
 <html>
   <head>
     	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    	<title>GlassFish JSP Page</title>
+    	<title>Omazon Web Shop</title>
   </head>
   <body>
-    <h1>Hello World!</h1>
+    <h1>Omazon Web Shop</h1>
+    <a href="OrderProcess.jsp?customer=1">Link</a>
   </body>
 </html> 

@@ -1,5 +1,7 @@
 package de.tud.in.middleware.dao;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -45,4 +47,9 @@ public class ProductDAO {
 		return product.getId();
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Product> getProducts() {
+		 Query query = entityManager.createQuery("SELECT e FROM Product e");
+		 return (List<Product>) query.getResultList();
+	}
 }
