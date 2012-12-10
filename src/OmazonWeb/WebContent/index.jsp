@@ -3,17 +3,18 @@
     	               "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
-  <head>
-    	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    	<title>Omazon Web Shop</title>
-  </head>
-  <body>
-    <h1>Omazon Web Shop</h1>
+  <%@ include file="/HeadFile.jsp" %>
     <p>Please enter your customerId</p>
     <form action="OrderProcess.jsp" method="GET">
     	<input type="text" name="customerId">
     	<input type="submit" value="Continue">
     </form>
     
+    <p>Please enter your orderId</p>
+    <form action="OrderState.jsp" method="GET">
+    	<input type="text" name="orderId">
+    	<input type="submit" value="Continue">
+    </form>
+    <%@ include file="/FootFile.jsp" %>
   </body>
 </html> 

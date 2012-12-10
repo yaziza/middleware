@@ -9,11 +9,7 @@
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Execute Order</title>
-</head>
-<body>
+<%@ include file="/HeadFile.jsp" %>
 
 <%
 	String ERROR_MSG = "Sorry, something went wrong..";
@@ -72,6 +68,6 @@
 <h1>Order has been executed...</h1>
 <p>Your order with the orderId <%=orderId %> has been executed.</p>
 <a href="index.jsp">Home</a>
-
+<%@ include file="/FootFile.jsp" %>
 </body>
 </html>
