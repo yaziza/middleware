@@ -70,7 +70,7 @@
 	}
 %>
 <h1>Order has been executed...</h1>
-<p>Your order with the orderId <%=orderId %> has been executed</p>
+<p>Your order with the orderId <%=orderId %> has been executed.</p>
 <a href="index.jsp">Home</a>
 
 </body>
