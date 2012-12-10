@@ -17,7 +17,7 @@
 	OrderManagementRemote omr = null;
 	ProductManagementRemote pmr = null;
 	long orderId = 0;
-	OrderState orderState = null;
+	OrderState newOrderState = null;
 	
 	try {
 		ctx = new InitialContext();
@@ -30,6 +30,7 @@
 	
 		// OrderId einlesen
 		String orderIdStr = request.getParameter("orderId");
+		String orderStateStr =  request.getParameter("orderState");
 		
 		try {
 			orderId = Long.parseLong(orderIdStr);
@@ -37,34 +38,19 @@
 			out.println(ERROR_MSG + "(Invalid OrderId Format)");
 			return;
 		}
+		
+		newOrderState = OrderState.valueOf(orderStateStr);
 	   		
-		try {
-		orderState = omr.getOrderState(orderId);
-		} catch(NullPointerException e) {
-			out.println("Null...");
-			return;
-		}
+		omr.changeOrderState(orderId, newOrderState);		
 	} catch (NamingException e) {
 		e.printStackTrace();
 		out.println(ERROR_MSG);
 		return;
 	}
 %>
-<H2>Current Order State</H2>
-<p>The Order with the OrderId <%=orderId %> has the OrderState <%= orderState %></p>
-<H2>Change Order State</H2>
-<p>Please select the new OrderState</p>
-<form action="ChangeOrderState.jsp">
-<%
-	for(OrderState s:OrderState.values()) {
-%>
-	<p><input type="radio" value="<%=s %>" name="orderState"><%=s %></p>
-<%
-	}
-%>
-<input type="hidden" value="<%=orderId %>" name="orderId">
-<input type="submit" value="Continue">
-</form>
+<H2>Order State Changed</H2>
+<p>The Order with the OrderId <%=orderId %> has the new OrderState <%= newOrderState %></p>
+
 <a href="index.jsp">Home</a>
 <%@ include file="/FootFile.jsp" %>
 </body>
