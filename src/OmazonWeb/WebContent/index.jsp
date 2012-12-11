@@ -10,9 +10,15 @@
     	<input type="submit" value="Continue">
     </form>
     
-    <p>Please enter your orderId</p>
+    <p>Please enter your orderId to change the orderState</p>
     <form action="OrderState.jsp" method="GET">
     	<input type="text" name="orderId">
+    	<input type="submit" value="Continue">
+    </form>
+    
+    <p>Please enter your orderId to trigger JMS to set the orderState to "delivered"</p>
+    <form action="DeliveryEventServlet" method="GET">
+    	<input type="text" name="shipmentId">
     	<input type="submit" value="Continue">
     </form>
     <%@ include file="/FootFile.jsp" %>
