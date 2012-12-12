@@ -7,9 +7,11 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import de.tud.in.middleware.customers.Customer;
 import de.tud.in.middleware.products.ProductInstance;
@@ -19,13 +21,13 @@ public final class CustomerOrder implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 
 	private final List<ProductInstance> productInstances;
 	@ManyToOne
 	private Customer customer;
-	private OrderState state;
+	private OrderState state = OrderState.INIT;
 
 	public CustomerOrder() {
 		super();
@@ -58,10 +60,12 @@ public final class CustomerOrder implements Serializable {
 		this.customer = customer;
 	}
 
+	@Transient
 	public OrderState getState() {
 		return state;
 	}
 
+	@Transient
 	public void setState(final OrderState state) {
 		// TODO Do I have to some JPA stuff here?
 		this.state = state;
