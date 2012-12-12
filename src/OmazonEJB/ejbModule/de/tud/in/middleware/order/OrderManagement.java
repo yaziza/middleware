@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+import javax.jws.WebService;
 
 import de.tud.in.middleware.dao.OrderDAO;
 import de.tud.in.middleware.products.ProductInstance;
@@ -12,6 +13,7 @@ import de.tud.in.middleware.products.ProductInstance;
 /**
  * Session Bean implementation class OrderManagement
  */
+@WebService
 @Stateless
 @LocalBean
 public class OrderManagement implements OrderManagementRemote, OrderManagementLocal {
@@ -37,6 +39,11 @@ public class OrderManagement implements OrderManagementRemote, OrderManagementLo
 	@Override
 	public OrderState getOrderState(final long orderId) {
 		return orderDAO.getOrderState(orderId);
+	}
+
+	@Override
+	public String getOrderStateAsString(long orderId) {
+		return orderDAO.getOrderState(orderId).toString();
 	}
 
 }

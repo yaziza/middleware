@@ -17,4 +17,7 @@ public interface OrderManagementRemote {
 	public void changeOrderState(long orderId, OrderState newState);
 	
 	public OrderState getOrderState(long orderId);
+	
+	public String getOrderStateAsString(long orderId);
+
 }

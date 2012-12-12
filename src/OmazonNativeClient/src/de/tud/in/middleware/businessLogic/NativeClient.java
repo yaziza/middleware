@@ -4,11 +4,18 @@
  */
 package de.tud.in.middleware.businessLogic;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import de.tud.in.middleware.customers.CustomerManagementRemote;
+import de.tud.in.middleware.order.OrderManagementRemote;
+import de.tud.in.middleware.order.OrderState;
+import de.tud.in.middleware.products.Product;
+import de.tud.in.middleware.products.ProductInstance;
 import de.tud.in.middleware.products.ProductManagementRemote;
 
 /**
@@ -17,24 +24,31 @@ import de.tud.in.middleware.products.ProductManagementRemote;
  */
 public class NativeClient extends javax.swing.JFrame {
 
-	// Variables declaration - do not modify
-	private javax.swing.JButton customerButton;
-	private javax.swing.JLabel customerNameLabel;
-	private javax.swing.JTextField customerNameTextField;
-	private javax.swing.JPanel customerPanel;
-	private javax.swing.JTabbedPane jTabbedPane1;
-	private javax.swing.JButton productButton;
-	private javax.swing.JLabel productDescriptionLabel;
-	private javax.swing.JTextField productDescriptionTextField;
-	private javax.swing.JPanel productPanel;
-
-	// End of variables declaration
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3511065810238683989L;
 	/**
 	 * Creates new form NativeClient
+	 * 
+	 * @throws NamingException
 	 */
-	public NativeClient() {
+	public NativeClient() throws NamingException {
 		initComponents();
+		init();
+	}
+
+	private void init() throws NamingException {
+		context = new InitialContext();
+		productManagementRemote = (ProductManagementRemote) context
+				.lookup(JNDINames.PRODUCT_NAME);
+
+		customerManagementRemote = (CustomerManagementRemote) context
+				.lookup(JNDINames.CUSTOMER_NAME);
+
+		orderManagementRemote = (OrderManagementRemote) context
+				.lookup(JNDINames.ORDER_NAME);
+
 	}
 
 	/**
@@ -46,7 +60,7 @@ public class NativeClient extends javax.swing.JFrame {
 	// <editor-fold defaultstate="collapsed" desc="Generated Code">
 	private void initComponents() {
 
-		jTabbedPane1 = new javax.swing.JTabbedPane();
+		nativeClientTabbedPane = new javax.swing.JTabbedPane();
 		customerPanel = new javax.swing.JPanel();
 		customerNameLabel = new javax.swing.JLabel();
 		customerButton = new javax.swing.JButton();
@@ -55,10 +69,24 @@ public class NativeClient extends javax.swing.JFrame {
 		productDescriptionLabel = new javax.swing.JLabel();
 		productButton = new javax.swing.JButton();
 		productDescriptionTextField = new javax.swing.JTextField();
+		orderPanel = new javax.swing.JPanel();
+		customerIDLabel = new javax.swing.JLabel();
+		customerIDTextField = new javax.swing.JTextField();
+		productIDLabel = new javax.swing.JLabel();
+		productIDTextField = new javax.swing.JTextField();
+		quantityLabel = new javax.swing.JLabel();
+		quantityTextField = new javax.swing.JTextField();
+		addproductButton = new javax.swing.JButton();
+		orderButton = new javax.swing.JButton();
+		orderStatePanel = new javax.swing.JPanel();
+		orderStateIDLabel = new javax.swing.JLabel();
+		orderStateIDTextField = new javax.swing.JTextField();
+		orderStateButton = new javax.swing.JButton();
+		orderStateLabel = new javax.swing.JLabel();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-		customerNameLabel.setText("Customer Name :");
+		customerNameLabel.setText("customer Name :");
 
 		customerButton.setText("add customer");
 		customerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -67,14 +95,46 @@ public class NativeClient extends javax.swing.JFrame {
 			}
 		});
 
-		org.jdesktop.layout.GroupLayout customerPanelLayout = createCustomerPanelLayout();
+		org.jdesktop.layout.GroupLayout customerPanelLayout = new org.jdesktop.layout.GroupLayout(
+				customerPanel);
+		customerPanel.setLayout(customerPanelLayout);
+		customerPanelLayout
+				.setHorizontalGroup(customerPanelLayout
+						.createParallelGroup(
+								org.jdesktop.layout.GroupLayout.LEADING)
+						.add(customerPanelLayout
+								.createSequentialGroup()
+								.add(38, 38, 38)
+								.add(customerPanelLayout
+										.createParallelGroup(
+												org.jdesktop.layout.GroupLayout.LEADING)
+										.add(customerPanelLayout
+												.createSequentialGroup()
+												.add(customerButton)
+												.addContainerGap(
+														org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
+														Short.MAX_VALUE))
+										.add(customerPanelLayout
+												.createSequentialGroup()
+												.add(customerNameLabel,
+														org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
+														110,
+														org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(
+														org.jdesktop.layout.LayoutStyle.RELATED,
+														83, Short.MAX_VALUE)
+												.add(customerNameTextField,
+														org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
+														130,
+														org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+												.add(88, 88, 88)))));
 		customerPanelLayout
 				.setVerticalGroup(customerPanelLayout
 						.createParallelGroup(
 								org.jdesktop.layout.GroupLayout.LEADING)
 						.add(customerPanelLayout
 								.createSequentialGroup()
-								.add(45, 45, 45)
+								.add(32, 32, 32)
 								.add(customerPanelLayout
 										.createParallelGroup(
 												org.jdesktop.layout.GroupLayout.BASELINE)
@@ -85,12 +145,12 @@ public class NativeClient extends javax.swing.JFrame {
 												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(
 										org.jdesktop.layout.LayoutStyle.RELATED,
-										111, Short.MAX_VALUE)
-								.add(customerButton).addContainerGap()));
+										151, Short.MAX_VALUE)
+								.add(customerButton).add(28, 28, 28)));
 
-		jTabbedPane1.addTab("Add Customer", customerPanel);
+		nativeClientTabbedPane.addTab("Add Customer", customerPanel);
 
-		productDescriptionLabel.setText("Product Description :");
+		productDescriptionLabel.setText("product description :");
 
 		productButton.setText("add product");
 		productButton.addActionListener(new java.awt.event.ActionListener() {
@@ -99,15 +159,46 @@ public class NativeClient extends javax.swing.JFrame {
 			}
 		});
 
-		org.jdesktop.layout.GroupLayout productPanelLayout = createProductPanelLayout();
-
+		org.jdesktop.layout.GroupLayout productPanelLayout = new org.jdesktop.layout.GroupLayout(
+				productPanel);
+		productPanel.setLayout(productPanelLayout);
+		productPanelLayout
+				.setHorizontalGroup(productPanelLayout
+						.createParallelGroup(
+								org.jdesktop.layout.GroupLayout.LEADING)
+						.add(productPanelLayout
+								.createSequentialGroup()
+								.add(38, 38, 38)
+								.add(productPanelLayout
+										.createParallelGroup(
+												org.jdesktop.layout.GroupLayout.LEADING)
+										.add(productPanelLayout
+												.createSequentialGroup()
+												.add(productButton)
+												.addContainerGap(
+														org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
+														Short.MAX_VALUE))
+										.add(productPanelLayout
+												.createSequentialGroup()
+												.add(productDescriptionLabel,
+														org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
+														136,
+														org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+												.addPreferredGap(
+														org.jdesktop.layout.LayoutStyle.RELATED,
+														67, Short.MAX_VALUE)
+												.add(productDescriptionTextField,
+														org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
+														120,
+														org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+												.add(88, 88, 88)))));
 		productPanelLayout
 				.setVerticalGroup(productPanelLayout
 						.createParallelGroup(
 								org.jdesktop.layout.GroupLayout.LEADING)
 						.add(productPanelLayout
 								.createSequentialGroup()
-								.add(45, 45, 45)
+								.add(32, 32, 32)
 								.add(productPanelLayout
 										.createParallelGroup(
 												org.jdesktop.layout.GroupLayout.BASELINE)
@@ -118,125 +209,262 @@ public class NativeClient extends javax.swing.JFrame {
 												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(
 										org.jdesktop.layout.LayoutStyle.RELATED,
-										111, Short.MAX_VALUE)
-								.add(productButton).addContainerGap()));
+										154, Short.MAX_VALUE)
+								.add(productButton).add(25, 25, 25)));
 
-		jTabbedPane1.addTab("Add Product", productPanel);
+		nativeClientTabbedPane.addTab("Add Product", productPanel);
+
+		customerIDLabel.setText("customer ID :");
+
+		productIDLabel.setText("product ID :");
+
+		quantityLabel.setText("quantity :");
+
+		addproductButton.setText("add product");
+		addproductButton.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				addproductButtonActionPerformed(evt);
+			}
+		});
+
+		orderButton.setText("send order");
+		orderButton.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				orderButtonActionPerformed(evt);
+			}
+		});
+
+		orderButton.setEnabled(false);
+
+		org.jdesktop.layout.GroupLayout orderPanelLayout = new org.jdesktop.layout.GroupLayout(
+				orderPanel);
+		orderPanel.setLayout(orderPanelLayout);
+		orderPanelLayout
+				.setHorizontalGroup(orderPanelLayout
+						.createParallelGroup(
+								org.jdesktop.layout.GroupLayout.LEADING)
+						.add(orderPanelLayout
+								.createSequentialGroup()
+								.add(orderPanelLayout
+										.createParallelGroup(
+												org.jdesktop.layout.GroupLayout.LEADING)
+										.add(orderPanelLayout
+												.createSequentialGroup()
+												.add(67, 67, 67)
+												.add(orderPanelLayout
+														.createParallelGroup(
+																org.jdesktop.layout.GroupLayout.LEADING)
+														.add(orderPanelLayout
+																.createParallelGroup(
+																		org.jdesktop.layout.GroupLayout.LEADING,
+																		false)
+																.add(productIDLabel,
+																		org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
+																		org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
+																		Short.MAX_VALUE)
+																.add(customerIDLabel,
+																		org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
+																		90,
+																		Short.MAX_VALUE))
+														.add(quantityLabel)))
+										.add(orderPanelLayout
+												.createSequentialGroup()
+												.add(47, 47, 47)
+												.add(addproductButton)))
+								.add(70, 70, 70)
+								.add(orderPanelLayout
+										.createParallelGroup(
+												org.jdesktop.layout.GroupLayout.LEADING)
+										.add(orderPanelLayout
+												.createParallelGroup(
+														org.jdesktop.layout.GroupLayout.LEADING,
+														false)
+												.add(customerIDTextField)
+												.add(productIDTextField,
+														org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
+														108, Short.MAX_VALUE)
+												.add(quantityTextField))
+										.add(orderButton))
+								.addContainerGap(101, Short.MAX_VALUE)));
+		orderPanelLayout
+				.setVerticalGroup(orderPanelLayout
+						.createParallelGroup(
+								org.jdesktop.layout.GroupLayout.LEADING)
+						.add(orderPanelLayout
+								.createSequentialGroup()
+								.add(34, 34, 34)
+								.add(orderPanelLayout
+										.createParallelGroup(
+												org.jdesktop.layout.GroupLayout.BASELINE)
+										.add(customerIDLabel)
+										.add(customerIDTextField,
+												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
+												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
+												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+								.add(18, 18, 18)
+								.add(orderPanelLayout
+										.createParallelGroup(
+												org.jdesktop.layout.GroupLayout.BASELINE)
+										.add(productIDLabel)
+										.add(productIDTextField,
+												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
+												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
+												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+								.add(18, 18, 18)
+								.add(orderPanelLayout
+										.createParallelGroup(
+												org.jdesktop.layout.GroupLayout.BASELINE)
+										.add(quantityLabel)
+										.add(quantityTextField,
+												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
+												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
+												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+								.add(18, 18, 18)
+								.add(orderPanelLayout
+										.createParallelGroup(
+												org.jdesktop.layout.GroupLayout.BASELINE)
+										.add(addproductButton).add(orderButton))
+								.addContainerGap(67, Short.MAX_VALUE)));
+
+		nativeClientTabbedPane.addTab("Add Order", orderPanel);
+
+		orderStateIDLabel.setText("order ID :");
+
+		orderStateButton.setText("show order state");
+		orderStateButton.addActionListener(new java.awt.event.ActionListener() {
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				orderStateButtonActionPerformed(evt);
+			}
+		});
+
+		org.jdesktop.layout.GroupLayout orderStatePanelLayout = new org.jdesktop.layout.GroupLayout(
+				orderStatePanel);
+		orderStatePanel.setLayout(orderStatePanelLayout);
+		orderStatePanelLayout
+				.setHorizontalGroup(orderStatePanelLayout
+						.createParallelGroup(
+								org.jdesktop.layout.GroupLayout.LEADING)
+						.add(orderStatePanelLayout
+								.createSequentialGroup()
+								.add(51, 51, 51)
+								.add(orderStatePanelLayout
+										.createParallelGroup(
+												org.jdesktop.layout.GroupLayout.LEADING)
+										.add(orderStateIDLabel,
+												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
+												76,
+												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+										.add(orderStateButton))
+								.add(23, 23, 23)
+								.add(orderStatePanelLayout
+										.createParallelGroup(
+												org.jdesktop.layout.GroupLayout.LEADING)
+										.add(orderStateLabel,
+												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
+												174,
+												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+										.add(orderStateIDTextField,
+												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
+												104,
+												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+								.addContainerGap(52, Short.MAX_VALUE)));
+		orderStatePanelLayout
+				.setVerticalGroup(orderStatePanelLayout
+						.createParallelGroup(
+								org.jdesktop.layout.GroupLayout.LEADING)
+						.add(orderStatePanelLayout
+								.createSequentialGroup()
+								.add(51, 51, 51)
+								.add(orderStatePanelLayout
+										.createParallelGroup(
+												org.jdesktop.layout.GroupLayout.BASELINE)
+										.add(orderStateIDLabel)
+										.add(orderStateIDTextField,
+												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
+												org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
+												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+								.addPreferredGap(
+										org.jdesktop.layout.LayoutStyle.RELATED,
+										124, Short.MAX_VALUE)
+								.add(orderStatePanelLayout
+										.createParallelGroup(
+												org.jdesktop.layout.GroupLayout.BASELINE)
+										.add(orderStateButton)
+										.add(orderStateLabel,
+												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
+												29,
+												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+								.add(36, 36, 36)));
+
+		nativeClientTabbedPane.addTab("Order State", orderStatePanel);
 
 		org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(
 				getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(layout.createParallelGroup(
 				org.jdesktop.layout.GroupLayout.LEADING).add(
-				org.jdesktop.layout.GroupLayout.TRAILING,
-				layout.createSequentialGroup().addContainerGap()
-						.add(jTabbedPane1).addContainerGap()));
+				layout.createSequentialGroup().add(nativeClientTabbedPane)
+						.addContainerGap()));
 		layout.setVerticalGroup(layout.createParallelGroup(
 				org.jdesktop.layout.GroupLayout.LEADING).add(
-				layout.createSequentialGroup().add(29, 29, 29)
-						.add(jTabbedPane1).addContainerGap()));
+				org.jdesktop.layout.GroupLayout.TRAILING,
+				layout.createSequentialGroup()
+						.addContainerGap(22, Short.MAX_VALUE)
+						.add(nativeClientTabbedPane,
+								org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
+								314,
+								org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+						.addContainerGap()));
 
 		pack();
 	}// </editor-fold>
 
-	private org.jdesktop.layout.GroupLayout createProductPanelLayout() {
-		org.jdesktop.layout.GroupLayout productPanelLayout = new org.jdesktop.layout.GroupLayout(
-				productPanel);
-		productPanel.setLayout(productPanelLayout);
-		productPanelLayout
-				.setHorizontalGroup(productPanelLayout
-						.createParallelGroup(
-								org.jdesktop.layout.GroupLayout.LEADING)
-						.add(org.jdesktop.layout.GroupLayout.TRAILING,
-								productPanelLayout
-										.createSequentialGroup()
-										.add(34, 34, 34)
-										.add(productDescriptionLabel,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												133,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(
-												org.jdesktop.layout.LayoutStyle.RELATED,
-												41, Short.MAX_VALUE)
-										.add(productPanelLayout
-												.createParallelGroup(
-														org.jdesktop.layout.GroupLayout.TRAILING,
-														false)
-												.add(productButton,
-														org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-														136, Short.MAX_VALUE)
-												.add(productDescriptionTextField))
-										.add(23, 23, 23)));
-		return productPanelLayout;
-	}
+	private void orderStateButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		long orderID = Long.parseLong(orderStateIDTextField.getText());
+		String state = orderManagementRemote.getOrderStateAsString(orderID);
 
-	private org.jdesktop.layout.GroupLayout createCustomerPanelLayout() {
-		org.jdesktop.layout.GroupLayout customerPanelLayout = new org.jdesktop.layout.GroupLayout(
-				customerPanel);
-		customerPanel.setLayout(customerPanelLayout);
-		customerPanelLayout
-				.setHorizontalGroup(customerPanelLayout
-						.createParallelGroup(
-								org.jdesktop.layout.GroupLayout.LEADING)
-						.add(org.jdesktop.layout.GroupLayout.TRAILING,
-								customerPanelLayout
-										.createSequentialGroup()
-										.add(34, 34, 34)
-										.add(customerNameLabel,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
-												133,
-												org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(
-												org.jdesktop.layout.LayoutStyle.RELATED,
-												41, Short.MAX_VALUE)
-										.add(customerPanelLayout
-												.createParallelGroup(
-														org.jdesktop.layout.GroupLayout.TRAILING,
-														false)
-												.add(customerButton,
-														org.jdesktop.layout.GroupLayout.DEFAULT_SIZE,
-														136, Short.MAX_VALUE)
-												.add(customerNameTextField))
-										.add(23, 23, 23)));
-		return customerPanelLayout;
+		orderStateIDTextField.setText("");
+		orderStateLabel.setText(state);
 	}
 
 	private void customerButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		CustomerManagementRemote customerManagementRemote;
-		Context context;
-		try {
-			context = new InitialContext();
-
-			context = new InitialContext();
-			customerManagementRemote = (CustomerManagementRemote) context
-					.lookup("de.tud.in.middleware.customers.CustomerManagementRemote#de.tud.in.middleware.customers.CustomerManagementRemote");
-
-			customerManagementRemote.addCustomer(customerNameTextField.getText());
-			customerNameTextField.setText("");
-
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		customerManagementRemote.addCustomer(customerNameTextField.getText());
+		customerNameTextField.setText("");
 	}
 
 	private void productButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		ProductManagementRemote productManagementRemote;
-		Context context;
-		try {
-			context = new InitialContext();
-			productManagementRemote = (ProductManagementRemote) context
-					.lookup("de.tud.in.middleware.products.ProductManagementRemote#de.tud.in.middleware.products.ProductManagementRemote");
+		productManagementRemote.addProduct(productDescriptionTextField
+				.getText());
+		productDescriptionTextField.setText("");
+	}
 
-			productManagementRemote.addProduct(productDescriptionTextField
-					.getText());
-			productDescriptionTextField.setText("");
+	private void addproductButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		orderButton.setEnabled(true);
 
-		} catch (NamingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Product product;
+		ProductInstance productInstance;
+
+		long productID = Long.parseLong(productIDTextField.getText());
+		product = productManagementRemote.getProduct(productID);
+
+		productInstance = new ProductInstance();
+		productInstance.setProduct(product);
+
+		int quantity = Integer.parseInt(quantityTextField.getText());
+		productInstance.setAmount(quantity);
+
+		products.add(productInstance);
+
+		quantityTextField.setText("");
+		productIDTextField.setText("");
+
+	}
+
+	private void orderButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		orderButton.setEnabled(false);
+
+		long customerID = Long.parseLong(customerIDTextField.getText());
+		orderManagementRemote.addOrderForCustomer(products, customerID);
 	}
 
 	/**
@@ -253,6 +481,7 @@ public class NativeClient extends javax.swing.JFrame {
 		 * http://download.oracle.com/javase
 		 * /tutorial/uiswing/lookandfeel/plaf.html
 		 */
+
 		try {
 			for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager
 					.getInstalledLookAndFeels()) {
@@ -279,8 +508,46 @@ public class NativeClient extends javax.swing.JFrame {
 		/* Create and display the form */
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new NativeClient().setVisible(true);
+				try {
+					new NativeClient().setVisible(true);
+				} catch (NamingException e) {
+					e.printStackTrace();
+				}
 			}
 		});
 	}
+
+	//
+	Context context;
+	ProductManagementRemote productManagementRemote;
+	CustomerManagementRemote customerManagementRemote;
+	OrderManagementRemote orderManagementRemote;
+	//
+
+	// Variables declaration - do not modify
+	private javax.swing.JButton addproductButton;
+	private javax.swing.JButton customerButton;
+	private javax.swing.JLabel customerIDLabel;
+	private javax.swing.JTextField customerIDTextField;
+	private javax.swing.JLabel customerNameLabel;
+	private javax.swing.JTextField customerNameTextField;
+	private javax.swing.JPanel customerPanel;
+	private javax.swing.JLabel orderStateLabel;
+	private javax.swing.JTabbedPane nativeClientTabbedPane;
+	private javax.swing.JButton orderButton;
+	private javax.swing.JPanel orderPanel;
+	private javax.swing.JButton orderStateButton;
+	private javax.swing.JLabel orderStateIDLabel;
+	private javax.swing.JTextField orderStateIDTextField;
+	private javax.swing.JPanel orderStatePanel;
+	private javax.swing.JButton productButton;
+	private javax.swing.JLabel productDescriptionLabel;
+	private javax.swing.JTextField productDescriptionTextField;
+	private javax.swing.JLabel productIDLabel;
+	private javax.swing.JTextField productIDTextField;
+	private javax.swing.JPanel productPanel;
+	private javax.swing.JLabel quantityLabel;
+	private javax.swing.JTextField quantityTextField;
+	private List<ProductInstance> products = new ArrayList<ProductInstance>();
+	// End of variables declaration
 }
