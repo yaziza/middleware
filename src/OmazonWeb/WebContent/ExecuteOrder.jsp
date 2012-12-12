@@ -61,6 +61,11 @@
 				}
 			}
 		}
+		if(productInstances.size() == 0) {
+			out.println("You have to order at least one product...");
+			out.flush();
+			return;
+		}
 
 		orderId = omr.addOrderForCustomer(productInstances, customerId);
 	} catch (NamingException e) {
