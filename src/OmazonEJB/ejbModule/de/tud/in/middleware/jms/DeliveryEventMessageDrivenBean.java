@@ -27,14 +27,15 @@ import de.tud.in.middleware.order.OrderState;
  */
 @MessageDriven(mappedName = "jms/DeliveryQueue")
 public class DeliveryEventMessageDrivenBean implements MessageListener {
-/* Um die Queue im Glassfish anzulegen:
- * asadmin create-jms-resource --restype javax.jms.ConnectionFactory jms/SimpleConnectionFactory
- asadmin create-jms-resource --restype javax.jms.Queue jms/DeliveryQueue
- */
-	
+	/*
+	 * Um die Queue im Glassfish anzulegen: asadmin create-jms-resource
+	 * --restype javax.jms.ConnectionFactory jms/SimpleConnectionFactory asadmin
+	 * create-jms-resource --restype javax.jms.Queue jms/DeliveryQueue
+	 */
+
 	@EJB
 	private OrderManagement orderManagement;
-	
+
 	/**
 	 * Default constructor.
 	 */
@@ -55,13 +56,14 @@ public class DeliveryEventMessageDrivenBean implements MessageListener {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			InputSource is = new InputSource(new StringReader(msgText));
 			Document document = builder.parse(is);
-			
-			// TODO Hier noch ein wenig das Format überprüfen (heist das feld wirklich deliveryevent...)
+
+			// TODO Hier noch ein wenig das Format überprüfen (heist das feld
+			// wirklich deliveryevent...)
 			String shipmentIdStr = document.getFirstChild().getTextContent();
 			long shipmentId = Long.parseLong(shipmentIdStr);
-			
+
 			orderManagement.changeOrderState(shipmentId, OrderState.DELIVERED);
-			
+
 			System.out.println("Message handled successfullly");
 		} catch (JMSException e) {
 			e.printStackTrace();

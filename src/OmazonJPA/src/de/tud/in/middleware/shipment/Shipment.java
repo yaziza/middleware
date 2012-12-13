@@ -1,37 +1,48 @@
 package de.tud.in.middleware.shipment;
 
 import java.io.Serializable;
+import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
+/**
+ * Entity implementation class for Entity: Shipment
+ * 
+ */
 @Entity
-public class Shipment implements Serializable{
-	private static final long serialVersionUID = 1589893603759874751L;
-	
-	@Id
-	@GeneratedValue
-	public int id;
-	public ShipmentPosition position = new ShipmentPosition();
+public class Shipment implements Serializable {
 
-	public Shipment() {
-		// nothing to do
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private Integer orderId;
+	public Integer getOrderId() {
+		return orderId;
 	}
 
-	public int getId() {
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
+	}
+
+	private ShipmentPosition position;
+
+	private static final long serialVersionUID = 1L;
+
+	public Shipment() {
+		super();
+	}
+
+	public Integer getId() {
 		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public ShipmentPosition getPosition() {
 		return position;
 	}
 
-	public void setId(final int id) {
-		this.id = id;
-	}
-
-	public void setPosition(final ShipmentPosition position) {
+	public void setPosition(ShipmentPosition position) {
 		this.position = position;
 	}
 }

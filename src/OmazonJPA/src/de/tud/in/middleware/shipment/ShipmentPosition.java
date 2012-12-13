@@ -7,8 +7,8 @@ public class ShipmentPosition implements Serializable {
 	private static final double DEFAULT_STARTING_LATITUDE = 49.877643;
 	private static final double DEFAULT_STARTING_LONGITUDE = 8.655004;
 
-	public double lastLatitude = DEFAULT_STARTING_LATITUDE;
-	public double lastLongitude = DEFAULT_STARTING_LONGITUDE;
+	private double lastLatitude = DEFAULT_STARTING_LATITUDE;
+	private double lastLongitude = DEFAULT_STARTING_LONGITUDE;
 
 	public ShipmentPosition() {
 		// nothing to do
