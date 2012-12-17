@@ -61,9 +61,9 @@ public class PositionEventServlet extends HttpServlet {
 
 			TextMessage message = session.createTextMessage();
 
-			String xmlStr = "<positionevent>\n\t<truckId>" + truckId
-					+ "</truckId>\n\t<long>" + laltitude + "</long>\n\t<lat>"
-					+ longitude + "</lat>\n</positionevent>";
+			String xmlStr = "<positionevent><truckId>" + truckId
+					+ "</truckId><long>" + laltitude + "</long><lat>"
+					+ longitude + "</lat></positionevent>";
 			
 			message.setText(xmlStr);
 			messageProducer.send(message);
