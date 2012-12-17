@@ -38,7 +38,7 @@ public class ProductDAO {
 
 		return product.getDescription();
 	}
-	
+
 	public Product getProduct(long id) {
 		Product product = (Product) entityManager.find(Product.class, (int) id);
 		return product;
@@ -48,13 +48,28 @@ public class ProductDAO {
 		Product product = new Product(description);
 		entityManager.persist(product);
 		entityManager.flush();
-		
+
 		return product.getId();
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<Product> getProducts() {
-		 Query query = entityManager.createQuery("SELECT e FROM Product e");
-		 return (List<Product>) query.getResultList();
+		Query query = entityManager.createQuery("SELECT e FROM Product e");
+		return (List<Product>) query.getResultList();
+	}
+
+	public void changeProductDescription(long id, String description) {
+		Product product = (Product) entityManager.find(Product.class, (int) id);
+		product.setDescription(description);
+
+		entityManager.persist(product);
+		entityManager.flush();
+	}
+
+	public void removeProduct(long id) {
+		Product product = (Product) entityManager.find(Product.class, (int) id);
+
+		entityManager.remove(product);
+		entityManager.flush();
 	}
 }

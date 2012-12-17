@@ -9,7 +9,6 @@ import javax.jws.WebService;
 
 import de.tud.in.middleware.dao.ProductDAO;
 
-
 /**
  * Session Bean implementation class ProductManagement
  */
@@ -44,9 +43,19 @@ public class ProductManagement implements ProductManagementRemote,
 	public List<Product> getProducts() {
 		return productDAO.getProducts();
 	}
-	
+
 	@Override
 	public Product getProduct(long id) {
 		return productDAO.getProduct(id);
+	}
+
+	@Override
+	public void changeProductDescription(long id, String description) {
+		productDAO.changeProductDescription(id, description);
+	}
+
+	@Override
+	public void removeProduct(long id) {
+		productDAO.removeProduct(id);
 	}
 }

@@ -36,4 +36,14 @@ public class CustomerManagement implements CustomerManagementRemote,
 	public long addCustomer(String name) {
 		return customerDAO.addCustomer(name);
 	}
+
+	@Override
+	public void changeCustomerName(long id, String name) {
+		customerDAO.changeCustomerName(id, name);
+	}
+
+	@Override
+	public void removeCustomer(long id) {
+		customerDAO.removeCustomer(id);
+	}
 }

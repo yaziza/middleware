@@ -66,4 +66,28 @@ public class CustomerDAO {
 		return customer.getId();
 	}
 
+	public void changeCustomerName(long id, String name) {
+		Customer customer = (Customer) entityManager.find(Customer.class,
+				(int) id);
+
+		if (customer == null)
+			return;
+
+		customer.setName(name);
+
+		entityManager.persist(customer);
+		entityManager.flush();
+	}
+
+	public void removeCustomer(long id) {
+		Customer customer = (Customer) entityManager.find(Customer.class,
+				(int) id);
+
+		if (customer == null)
+			return;
+
+		entityManager.remove(customer);
+		entityManager.flush();
+	}
+
 }

@@ -11,4 +11,8 @@ public interface CustomerManagementRemote {
 
 	public long addCustomer(String name);
 
+	public void changeCustomerName(long id, String name);
+
+	public void removeCustomer(long id);
+
 }
