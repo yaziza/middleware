@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.jws.WebService;
 
 import de.tud.in.middleware.dao.ShipmentDAO;
+import de.tud.in.middleware.order.CustomerOrder;
 
 /**
  * Session Bean implementation class ShipmentManagement
@@ -47,10 +48,10 @@ public class ShipmentManagement implements ShipmentManagementRemote {
     }
 
 	/**
-     * @see ShipmentManagementRemote#addShipmentForOrder(Shipment, long)
+     * @see ShipmentManagementRemote#addOrderForShipment(Shipment, long)
      */
-    public long addShipmentForOrder(Shipment shipment, long orderId) {
-		return shipmentDAO.addShipmentForOrder(shipment, orderId);
+    public void addOrderForShipment(long shipmentId, CustomerOrder order) {
+		shipmentDAO.addOrderForShipment(shipmentId, order);
     }
 
 }

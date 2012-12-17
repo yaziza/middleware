@@ -6,6 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import de.tud.in.middleware.order.CustomerOrder;
 import de.tud.in.middleware.shipment.Shipment;
 import de.tud.in.middleware.shipment.ShipmentPosition;
 
@@ -42,13 +43,21 @@ public class ShipmentDAO {
 	}
 
 	public void setShipmentPosition(long shipmentId, ShipmentPosition position) {
-		// TODO Auto-generated method stub
+		Shipment shipment = (Shipment) entityManager.find(Shipment.class,
+				shipmentId);
 
+		shipment.setPosition(position);
+		entityManager.persist(shipment);
+		entityManager.flush();
 	}
 
-	public long addShipmentForOrder(Shipment shipment, long orderId) {
-		// TODO Auto-generated method stub
-		return 0;
+	public void addOrderForShipment(long shipmentId, CustomerOrder order) {
+		Shipment shipment = (Shipment) entityManager.find(Shipment.class,
+				shipmentId);
+		entityManager.persist(order);
+		shipment.setId(order.getId());
+		entityManager.persist(shipment);
+		entityManager.flush();
 	}
 
 }

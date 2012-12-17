@@ -15,14 +15,16 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import de.tud.in.middleware.order.OrderManagement;
-import de.tud.in.middleware.order.OrderState;
-import de.tud.in.middleware.shipment.ShipmentManagement;
 import de.tud.in.middleware.shipment.ShipmentPosition;
 import de.tud.in.middleware.shipment.TruckManagement;
 
 @MessageDriven(mappedName = "jms/PositionQueue")
 public class PositionEventMessageDrivenBean implements MessageListener {
+
+	/**
+	 * Um die Queue im Glassfish anzulegen: asadmin create-jms-resource
+	 * --restype javax.jms.Queue jms/PositionQueue
+	 */
 
 	@EJB
 	private TruckManagement truckManagement;
@@ -37,8 +39,8 @@ public class PositionEventMessageDrivenBean implements MessageListener {
 
 			Document document = getXMLDocument(msgText);
 
-			// TODO Hier noch ein wenig das Format überprüfen (heist das feld
-			// wirklich deliveryevent...)
+			// TODO Hier noch ein wenig das Format ŸberprŸfen (heist das feld
+			// wirklich positionevent...)
 			String truckIdStr = document.getElementById("truckId")
 					.getTextContent();
 			String longStr = document.getElementById("long").getTextContent();

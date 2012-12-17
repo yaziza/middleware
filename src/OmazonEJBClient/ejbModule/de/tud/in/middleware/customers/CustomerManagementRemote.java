@@ -2,8 +2,6 @@ package de.tud.in.middleware.customers;
 
 import javax.ejb.Remote;
 
-import de.tud.in.middleware.order.CustomerOrder;
-
 @Remote
 public interface CustomerManagementRemote {
 

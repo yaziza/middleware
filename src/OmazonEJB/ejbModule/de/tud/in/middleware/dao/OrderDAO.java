@@ -31,6 +31,7 @@ public class OrderDAO {
 	 */
 	public CustomerOrder addOrder(List<ProductInstance> products, long customerId) {
 		CustomerOrder order = new CustomerOrder();
+		order.setState(OrderState.INIT);
 		// XXX long int
 		Customer customer = (Customer) entityManager.find(Customer.class, (int) customerId);
 		order.setCustomer(customer);

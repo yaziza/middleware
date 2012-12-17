@@ -6,6 +6,7 @@
 		<class>de.tud.in.middleware.customers.Customer</class>
 		<class>de.tud.in.middleware.products.Product</class>
 		<class>de.tud.in.middleware.products.ProductInstance</class>
-		
+		<class>de.tud.in.middleware.shipment.Truck</class>
+		<class>de.tud.in.middleware.shipment.Shipment</class>		
 	</persistence-unit>
 </persistence>

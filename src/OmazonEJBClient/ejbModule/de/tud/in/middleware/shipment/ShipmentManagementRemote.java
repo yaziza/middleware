@@ -2,12 +2,12 @@ package de.tud.in.middleware.shipment;
 
 import javax.ejb.Remote;
 
+import de.tud.in.middleware.order.CustomerOrder;
+
 @Remote
 public interface ShipmentManagementRemote {
-	/**
-	 * @return Returns the ID of the added shipment.
-	 */
-	public long addShipmentForOrder(Shipment shipment, long orderId);
+
+	public void addOrderForShipment(long shipmentId, CustomerOrder order);
 
 	public long getOrderId(long shipmentId);
 

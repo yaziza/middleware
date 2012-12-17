@@ -22,9 +22,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/DeliveryEventServlet")
 public class DeliveryEventServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    
-    @Resource(mappedName = "jms/SimpleConnectionFactory")
+
+	@Resource(mappedName = "jms/SimpleConnectionFactory")
 	// = connection factorie's JNDI name
 	private ConnectionFactory connectionFactory;
 
@@ -33,9 +32,11 @@ public class DeliveryEventServlet extends HttpServlet {
 	private Queue queue;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
 		PrintWriter pw = new PrintWriter(response.getOutputStream());
 
 		String shipmentIdStr = request.getParameter("shipmentId");
@@ -45,19 +46,20 @@ public class DeliveryEventServlet extends HttpServlet {
 			javax.jms.Session session = connection.createSession(false,
 					Session.AUTO_ACKNOWLEDGE);
 			MessageProducer messageProducer = session.createProducer(queue);
-			
+
 			TextMessage message = session.createTextMessage();
-			
-			String xmlStr = "<deliveryevent><shipmentId>" + shipmentIdStr + "</shipmentId></deliveryevent>";
+
+			String xmlStr = "<deliveryevent><shipmentId>" + shipmentIdStr
+					+ "</shipmentId></deliveryevent>";
 			message.setText(xmlStr);
 			messageProducer.send(message);
-			
+
 			pw.println("JMS Message produced");
 			pw.println(xmlStr);
 		} catch (JMSException e) {
 			pw.println("Fehler " + e);
 		}
-		
+
 		pw.flush();
 		pw.close();
 	}

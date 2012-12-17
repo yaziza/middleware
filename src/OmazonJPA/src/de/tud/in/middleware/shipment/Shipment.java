@@ -14,14 +14,6 @@ public class Shipment implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private Integer orderId;
-	public Integer getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(Integer orderId) {
-		this.orderId = orderId;
-	}
-
 	private ShipmentPosition position;
 
 	private static final long serialVersionUID = 1L;
@@ -44,5 +36,13 @@ public class Shipment implements Serializable {
 
 	public void setPosition(ShipmentPosition position) {
 		this.position = position;
+	}
+
+	public Integer getOrderId() {
+		return orderId;
+	}
+
+	public void setOrderId(Integer orderId) {
+		this.orderId = orderId;
 	}
 }
