@@ -22,6 +22,12 @@
     	<input type="submit" value="Continue">
     </form>
     
+  	<p>Please enter the truckId to change the Truck Position</p>
+        <form action="TruckPosition.jsp" method="GET">
+    	<input type="text" name="truckId">
+    	<input type="submit" value="Continue">
+    </form>
+    
    	<p>Please enter the truck ID, latitude and longitude to change the Truck Position</p>
         <form action="PositionEventServlet" method="GET">
     	<input type="text" name="truckId">

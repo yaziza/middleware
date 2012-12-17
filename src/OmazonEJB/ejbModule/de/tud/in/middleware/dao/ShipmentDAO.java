@@ -32,19 +32,19 @@ public class ShipmentDAO {
 
 	public long getOrderId(long shipmentId) {
 		Shipment shipment = (Shipment) entityManager.find(Shipment.class,
-				shipmentId);
+				(int) shipmentId);
 		return shipment.getOrderId();
 	}
 
 	public ShipmentPosition getShipmentPosition(long shipmentId) {
 		Shipment shipment = (Shipment) entityManager.find(Shipment.class,
-				shipmentId);
+				(int) shipmentId);
 		return shipment.getPosition();
 	}
 
 	public void setShipmentPosition(long shipmentId, ShipmentPosition position) {
 		Shipment shipment = (Shipment) entityManager.find(Shipment.class,
-				shipmentId);
+				(int) shipmentId);
 
 		shipment.setPosition(position);
 		entityManager.persist(shipment);
@@ -53,7 +53,7 @@ public class ShipmentDAO {
 
 	public void addOrderForShipment(long shipmentId, CustomerOrder order) {
 		Shipment shipment = (Shipment) entityManager.find(Shipment.class,
-				shipmentId);
+				(int) shipmentId);
 		entityManager.persist(order);
 		shipment.setId(order.getId());
 		entityManager.persist(shipment);
