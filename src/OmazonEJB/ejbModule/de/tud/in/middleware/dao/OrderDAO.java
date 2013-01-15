@@ -9,6 +9,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
 import de.tud.in.middleware.customers.Customer;
+import de.tud.in.middleware.mail.MailHandler;
 import de.tud.in.middleware.order.CustomerOrder;
 import de.tud.in.middleware.order.OrderState;
 import de.tud.in.middleware.products.ProductInstance;
@@ -35,6 +36,9 @@ public class OrderDAO {
 		// XXX long int
 		Customer customer = (Customer) entityManager.find(Customer.class, (int) customerId);
 		order.setCustomer(customer);
+		
+		MailHandler.sendMail(customer.getEMail(), "Order Confirmation Omazon", "<H2>Dear " + customer.getName() + "</H2>Your order is confirmed.");
+		
 		
 		customerDAO.addOrderForCustomer(customerId, order);
 		

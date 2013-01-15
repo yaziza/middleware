@@ -31,7 +31,7 @@ public class NativeClient {
 		final List<ProductInstance> productList = new ArrayList<ProductInstance>();
 		productList.add(pi);
 
-		System.out.println("F�ge Kunden hinzu... " + cmr.addCustomer("Horst"));
+		System.out.println("F�ge Kunden hinzu... " + cmr.addCustomer("Horst", "alexander@froemmgen.de"));
 		System.out.println("Neue Order mit Nummer: " + omr.addOrderForCustomer(productList, 1));
 	}
 }

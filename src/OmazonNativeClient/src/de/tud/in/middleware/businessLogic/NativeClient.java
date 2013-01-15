@@ -127,6 +127,7 @@ public class NativeClient extends javax.swing.JFrame {
 														org.jdesktop.layout.GroupLayout.PREFERRED_SIZE,
 														130,
 														org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+												
 												.add(88, 88, 88)))));
 		customerPanelLayout
 				.setVerticalGroup(customerPanelLayout
@@ -428,7 +429,7 @@ public class NativeClient extends javax.swing.JFrame {
 	}
 
 	private void customerButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		customerManagementRemote.addCustomer(customerNameTextField.getText());
+		customerManagementRemote.addCustomer(customerNameTextField.getText(), "alexander@froemmgen.de");
 		customerNameTextField.setText("");
 	}
 

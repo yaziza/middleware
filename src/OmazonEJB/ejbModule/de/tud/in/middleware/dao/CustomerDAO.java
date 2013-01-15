@@ -58,8 +58,9 @@ public class CustomerDAO {
 		return order.getId();
 	}
 
-	public long addCustomer(String name) {
+	public long addCustomer(String name, String eMail) {
 		Customer customer = new Customer(name);
+		customer.setEMail(eMail);
 		entityManager.persist(customer);
 		entityManager.flush();
 

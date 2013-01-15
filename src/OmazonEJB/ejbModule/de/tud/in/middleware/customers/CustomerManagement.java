@@ -33,8 +33,8 @@ public class CustomerManagement implements CustomerManagementRemote,
 	}
 
 	@Override
-	public long addCustomer(String name) {
-		return customerDAO.addCustomer(name);
+	public long addCustomer(String name, String eMail) {
+		return customerDAO.addCustomer(name, eMail);
 	}
 
 	@Override

@@ -24,6 +24,7 @@ public class Customer implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	private String name;
+	private String eMail;
 	private List<CustomerOrder> orders;
 	
 	private static final long serialVersionUID = 1L;
@@ -53,6 +54,14 @@ public class Customer implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getEMail() {
+		return eMail;
+	}
+	
+	public void setEMail(String eMail) {
+		this.eMail = eMail;
 	}
 	
 	@OneToMany(cascade=CascadeType.PERSIST)
