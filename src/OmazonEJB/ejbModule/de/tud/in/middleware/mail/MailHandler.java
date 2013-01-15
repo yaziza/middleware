@@ -20,61 +20,48 @@ import javax.mail.internet.MimeMultipart;
 
 public class MailHandler {
 	
-	public static synchronized void sendMail(String customerName, String msg) {
-/*
+	public static void main(String[] args) {
+		sendMail("alexander@froemmgen.de" , "Omazon Notification", "Hallo");
+	}
+	
+	public static synchronized void sendMail(String destAddr, String subStr, String msgStr) {
+		final String user = "Omazon@gmx.de";
+		final String pwd = "Middleware";
 
 		Properties props = new Properties();
-		props.put("mail.debug", Boolean.valueOf(CentralInstance.eMailDebug));
-		props.put("mail.smtp.host", "smtp.strato.de");
+		props.put("mail.debug", true);
+		props.put("mail.smtp.host", "smtp.gmx.net");
 		props.put("mail.smtp.auth", "true");
-		props.put("mail.from", CentralInstance.eMailFrom);
+		props.put("mail.from", user);
 
 		Session session = Session.getInstance(props, null);
 		try {
 			MimeMessage msg = new MimeMessage(session);
 
-			msg.setRecipients(Message.RecipientType.TO, to);
-			msg.setSubject("PROASS Cloud App Bestellung");
+			msg.setRecipients(Message.RecipientType.TO, destAddr);
+			msg.setSubject(subStr);
 			msg.setSentDate(new Date());
-			msg.setFrom(new InternetAddress(CentralInstance.eMailFrom,
-					"PROASS Cloud App"));
+			msg.setFrom(new InternetAddress(user,
+					"Omazon Inc"));
 
 			BodyPart messageBodyPart = new MimeBodyPart();
 
-			String datum = ConsoleHelper.getFormattedTimestamp();
-			String htmlText = "<H2>PROASS Cloud App</H2>Folgende Bestellung wurde vom Benutzer "
-					+ username
-					+ " am "
-					+ datum
-					+ " versendet.<br><br><br>Dies ist eine automatisch generierte eMail von<br>"
-					+ "<img src=\"http://www.proass.de/images/proass.jpg\">";
+			
+			String htmlText = msgStr;
 
-			//messageBodyPart.setText(htmlText);
 			messageBodyPart.setContent(htmlText, "text/html");
 
-			Multipart multipart = new MimeMultipart();
-			multipart.addBodyPart(messageBodyPart);
-			MimeBodyPart attachmentBodyPart = new MimeBodyPart();
-
-			DataSource source = new FileDataSource(filename);
-			attachmentBodyPart.setDataHandler(new DataHandler(source));
-			attachmentBodyPart.setFileName("Bestellung.pdf");
-			multipart.addBodyPart(attachmentBodyPart);
-			msg.setContent(multipart);
-
+			msg.setContent(htmlText, "text/html");
 			Transport t = session.getTransport("smtp");
-			t.connect(CentralInstance.eMailFrom, CentralInstance.eMailFromPwd);
+			t.connect("smtp.gmx.net", 587, user, pwd);
 			t.sendMessage(msg, msg.getAllRecipients());
-
-			ConsoleHelper.println("Bestellung wurde für Benutzer " + username
-					+ " per eMail an " + to + " versendet");
 		} catch (MessagingException mex) {
-			ConsoleHelper.println("send failed, exception: " + mex);
+			System.out.println("send failed, exception: " + mex);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
-			ConsoleHelper.println("Mail error");
+			System.out.println("Mail error");
 			e.printStackTrace();
-		}*/
+		}
 	}
 }
