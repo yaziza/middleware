@@ -8,7 +8,6 @@ import javax.ejb.Stateless;
 import javax.jws.WebService;
 
 import de.tud.in.middleware.dao.OrderDAO;
-import de.tud.in.middleware.mail.MailHandler;
 import de.tud.in.middleware.products.ProductInstance;
 
 /**
@@ -29,7 +28,7 @@ public class OrderManagement implements OrderManagementRemote, OrderManagementLo
 	@Override
 	public long addOrderForCustomer(final List<ProductInstance> products, final long customerId) {
 		final CustomerOrder order = orderDAO.addOrder(products, customerId);
-		
+
 		return order.getId();
 	}
 
@@ -44,8 +43,12 @@ public class OrderManagement implements OrderManagementRemote, OrderManagementLo
 	}
 
 	@Override
-	public String getOrderStateAsString(long orderId) {
-		return orderDAO.getOrderState(orderId).toString();
+	public String getOrderStateAsString(final long orderId) {
+		final OrderState state = getOrderState(orderId);
+		if (state == OrderState.EXCEPTION) {
+			return String.format("%s - %s", state, state.exceptionDescription);
+		}
+		return state.toString();
 	}
 
 }

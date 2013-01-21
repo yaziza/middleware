@@ -6,5 +6,8 @@ public enum OrderState implements Serializable {
 	INIT,
 	OPEN,
 	DISPATCHED,
-	DELIVERED;
+	DELIVERED,
+	EXCEPTION;
+	
+	public String exceptionDescription;
 }

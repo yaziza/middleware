@@ -1,7 +1,6 @@
 package de.tud.in.middleware.jms;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import javax.ejb.EJB;
 import javax.ejb.MessageDriven;
@@ -9,13 +8,9 @@ import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.jms.TextMessage;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import de.tud.in.middleware.shipment.ShipmentPosition;
@@ -33,58 +28,42 @@ public class PositionEventMessageDrivenBean implements MessageListener {
 	private TruckManagement truckManagement;
 
 	@Override
-	public void onMessage(Message message) {
+	public void onMessage(final Message message) {
 		try {
 
-			String msgText = ((TextMessage) message).getText();
+			final String msgText = ((TextMessage) message).getText();
 			System.out.println(msgText);
 
-			Document document = getXMLDocument(msgText);
+			final Document document = EventUtil.getXMLDocument(msgText);
 			handleRequest(document);
 
 			System.out.println("Message handled successfullly");
-		} catch (ParserConfigurationException e) {
+		} catch (final ParserConfigurationException e) {
 			e.printStackTrace();
-		} catch (SAXException e) {
+		} catch (final SAXException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
+		} catch (final IOException e) {
 			e.printStackTrace();
-		} catch (JMSException e) {
+		} catch (final JMSException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private Document getXMLDocument(String msgText)
-			throws ParserConfigurationException, SAXException, IOException {
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder;
-		builder = factory.newDocumentBuilder();
-
-		InputSource is = new InputSource(new StringReader(msgText));
-		Document document = builder.parse(is);
-		return document;
-	}
-
-	private void handleRequest(Document document) {
+	private void handleRequest(final Document document) {
 		long truckId;
 		Double latitude;
 		Double longitude;
-		// TODO Hier noch ein wenig das Format überprüfen (heist das feld
+		// TODO Hier noch ein wenig das Format √ºberpr√ºfen (heist das feld
 		// wirklich positionevent...)
-		String truckIdStr = getNodeContent(document, "truckId");
-		String latStr = getNodeContent(document, "lat");
-		String longStr = getNodeContent(document, "long");
+		final String truckIdStr = EventUtil.getNodeContent(document, "truckId");
+		final String latStr = EventUtil.getNodeContent(document, "lat");
+		final String longStr = EventUtil.getNodeContent(document, "long");
 
 		truckId = Long.parseLong(truckIdStr);
 		longitude = Double.parseDouble(longStr);
 		latitude = Double.parseDouble(latStr);
 
-		ShipmentPosition position = new ShipmentPosition(latitude, longitude);
+		final ShipmentPosition position = new ShipmentPosition(latitude, longitude);
 		truckManagement.changeTruckPosition(truckId, position);
 	}
-
-	private String getNodeContent(Document document, String name) {
-		return document.getElementsByTagName(name).item(0).getTextContent();
-	}
-
 }
