@@ -28,7 +28,7 @@ import de.tud.in.middleware.shipment.Truck;
 
 /*
  * Um die Queue im Glassfish anzulegen: asadmin create-jms-resource
- * --restype javax.jms.Queue jms/PositionQueue
+ * --restype javax.jms.Queue jms/ExceptionQueue
  */
 @MessageDriven(mappedName = "jms/ExceptionQueue")
 public class ExceptionEventMessageDrivenBean implements MessageListener {
