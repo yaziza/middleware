@@ -24,7 +24,7 @@ public class Truck implements Serializable {
 
 	public Truck() {
 		super();
-		position = new ShipmentPosition(-1, -1);
+		position = new ShipmentPosition();
 	}
 
 	public Integer getId() {

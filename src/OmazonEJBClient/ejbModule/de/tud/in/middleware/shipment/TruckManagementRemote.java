@@ -5,7 +5,7 @@ import javax.ejb.Remote;
 @Remote
 public interface TruckManagementRemote {
 
-	public long addTruck(double latitude, double longitude);
+	public long createTruck();
 
 	public void addShipmentToTruck(long truckId, Shipment shipment);
 

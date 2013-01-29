@@ -60,10 +60,8 @@ public class TruckDAO {
 		return truck.getPosition().getLastLongitude();
 	}
 
-	public long addTruck(double latitude, double longitude) {
-		ShipmentPosition position = new ShipmentPosition(latitude, longitude);
+	public long createTruck() {
 		Truck truck = new Truck();
-		truck.setPosition(position);
 		
 		entityManager.persist(truck);
 		entityManager.flush();

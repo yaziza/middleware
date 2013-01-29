@@ -52,7 +52,7 @@ public class TruckManagement implements TruckManagementRemote,
 	}
 
 	@Override
-	public long addTruck(double latitude, double longitude) {
-		return truckDAO.addTruck(latitude, longitude);
+	public long createTruck() {
+		return truckDAO.createTruck();
 	}
 }
