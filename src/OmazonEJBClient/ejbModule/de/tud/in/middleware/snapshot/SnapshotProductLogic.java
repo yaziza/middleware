@@ -21,7 +21,7 @@ public final class SnapshotProductLogic implements ProductManagementRemote {
 	}
 
 	@Override
-	public String getProductDescription(final long id) {
+	public String getProductDescription(final Integer id) {
 		return getProduct(id).getDescription();
 	}
 
@@ -39,7 +39,7 @@ public final class SnapshotProductLogic implements ProductManagementRemote {
 	}
 
 	@Override
-	public Product getProduct(final long id) {
+	public Product getProduct(final Integer id) {
 		return productMap.get(id);
 	}
 
@@ -47,7 +47,7 @@ public final class SnapshotProductLogic implements ProductManagementRemote {
 	 * Unsupported by snapshot.
 	 */
 	@Override
-	public void changeProductDescription(final long id, final String description) {
+	public void changeProductDescription(final Integer id, final String description) {
 		throw new UnsupportedOperationException("Snapshot is read only.");
 	}
 
@@ -55,7 +55,7 @@ public final class SnapshotProductLogic implements ProductManagementRemote {
 	 * Unsupported by snapshot.
 	 */
 	@Override
-	public void removeProduct(final long id) {
+	public void removeProduct(final Integer id) {
 		throw new UnsupportedOperationException("Snapshot is read only.");
 	}
 

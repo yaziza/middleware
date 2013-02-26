@@ -12,12 +12,12 @@ public interface OrderManagementRemote {
 	/**
 	 * @return Returns ID of added order.
 	 */
-	public long addOrderForCustomer(List<ProductInstance> products, long customerId);
-	
-	public void changeOrderState(long orderId, OrderState newState);
-	
-	public OrderState getOrderState(long orderId);
-	
-	public String getOrderStateAsString(long orderId);
+	public long addOrderForCustomer(List<ProductInstance> products, Integer customerId);
+
+	public void changeOrderState(Integer orderId, OrderState newState);
+
+	public OrderState getOrderState(Integer orderId);
+
+	public String getOrderStateAsString(Integer orderId);
 
 }

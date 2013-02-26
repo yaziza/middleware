@@ -13,8 +13,7 @@ import de.tud.in.middleware.dao.TruckDAO;
 @Stateless
 @WebService
 @LocalBean
-public class TruckManagement implements TruckManagementRemote,
-		TruckManagementLocal {
+public class TruckManagement implements TruckManagementRemote, TruckManagementLocal {
 
 	@EJB
 	TruckDAO truckDAO;
@@ -27,27 +26,27 @@ public class TruckManagement implements TruckManagementRemote,
 	}
 
 	@Override
-	public void addShipmentToTruck(long truckId, Shipment shipment) {
+	public void addShipmentToTruck(final Integer truckId, final Shipment shipment) {
 		truckDAO.addShipmentToTruck(truckId, shipment);
 	}
 
 	@Override
-	public void removeShipmentFromTrack(long truckId, long shipmentId) {
+	public void removeShipmentFromTrack(final Integer truckId, final Integer shipmentId) {
 		truckDAO.removeShipmentFromTrack(truckId, shipmentId);
 	}
 
 	@Override
-	public void changeTruckPosition(long truckId, ShipmentPosition position) {
+	public void changeTruckPosition(final Integer truckId, final ShipmentPosition position) {
 		truckDAO.changeTruckPosition(truckId, position);
 	}
 
 	@Override
-	public double getTruckLatitude(long truckId) {
+	public double getTruckLatitude(final Integer truckId) {
 		return truckDAO.getTruckLatitude(truckId);
 	}
 
 	@Override
-	public double getTruckLongitude(long truckId) {
+	public double getTruckLongitude(final Integer truckId) {
 		return truckDAO.getTruckLongitude(truckId);
 	}
 

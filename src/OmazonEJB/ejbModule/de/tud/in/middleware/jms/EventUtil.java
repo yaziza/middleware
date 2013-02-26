@@ -14,7 +14,8 @@ import org.xml.sax.SAXException;
 
 public final class EventUtil {
 
-	public static Document getXMLDocument(final String msgText) throws JMSException, ParserConfigurationException, SAXException, IOException {
+	public static Document getXMLDocument(final String msgText) throws JMSException, ParserConfigurationException, SAXException,
+			IOException {
 		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder;
 		builder = factory.newDocumentBuilder();

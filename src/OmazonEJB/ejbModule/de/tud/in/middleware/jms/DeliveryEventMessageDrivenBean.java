@@ -51,7 +51,7 @@ public class DeliveryEventMessageDrivenBean implements MessageListener {
 			// TODO Hier noch ein wenig das Format überprüfen (heist das feld
 			// wirklich deliveryevent...)
 			final String shipmentIdStr = document.getFirstChild().getTextContent();
-			final long shipmentId = Long.parseLong(shipmentIdStr);
+			final Integer shipmentId = Integer.parseInt(shipmentIdStr);
 
 			orderManagement.changeOrderState(shipmentId, OrderState.DELIVERED);
 

@@ -19,17 +19,17 @@ public final class SnapshotShipmentLogic implements ShipmentManagementRemote {
 	 * Unsupported by snapshot.
 	 */
 	@Override
-	public void addOrderForShipment(final long shipmentId, final CustomerOrder order) {
+	public void addOrderForShipment(final Integer shipmentId, final CustomerOrder order) {
 		throw new UnsupportedOperationException("Snapshot is read only.");
 	}
 
 	@Override
-	public long getOrderId(final long shipmentId) {
+	public long getOrderId(final Integer shipmentId) {
 		return shipmentMap.get(shipmentId).getOrderId();
 	}
 
 	@Override
-	public ShipmentPosition getShipmentPosition(final long shipmentId) {
+	public ShipmentPosition getShipmentPosition(final Integer shipmentId) {
 		return shipmentMap.get(shipmentId).getPosition();
 	}
 
@@ -37,7 +37,7 @@ public final class SnapshotShipmentLogic implements ShipmentManagementRemote {
 	 * Unsupported by snapshot.
 	 */
 	@Override
-	public void setShipmentPosition(final long shipmentId, final ShipmentPosition position) {
+	public void setShipmentPosition(final Integer shipmentId, final ShipmentPosition position) {
 		throw new UnsupportedOperationException("Snapshot is read only.");
 	}
 

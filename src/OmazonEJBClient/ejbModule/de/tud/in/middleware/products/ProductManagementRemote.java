@@ -8,16 +8,16 @@ import javax.ejb.Remote;
 public interface ProductManagementRemote {
 
 	public long getNumberOfProducts();
-	
-	public String getProductDescription(long id);
-	
+
+	public String getProductDescription(Integer id);
+
 	public long addProduct(String description);
-	
+
 	public List<Product> getProducts();
-	
-	public Product getProduct(long id);
-	
-	public void changeProductDescription(long id, String description);
-	
-	public void removeProduct(long id);
+
+	public Product getProduct(Integer id);
+
+	public void changeProductDescription(Integer id, String description);
+
+	public void removeProduct(Integer id);
 }

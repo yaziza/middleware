@@ -7,11 +7,11 @@ import de.tud.in.middleware.order.CustomerOrder;
 @Remote
 public interface ShipmentManagementRemote {
 
-	public void addOrderForShipment(long shipmentId, CustomerOrder order);
+	public void addOrderForShipment(Integer shipmentId, CustomerOrder order);
 
-	public long getOrderId(long shipmentId);
+	public long getOrderId(Integer shipmentId);
 
-	public ShipmentPosition getShipmentPosition(long shipmentId);
+	public ShipmentPosition getShipmentPosition(Integer shipmentId);
 
-	public void setShipmentPosition(long shipmentId, ShipmentPosition position);
+	public void setShipmentPosition(Integer shipmentId, ShipmentPosition position);
 }

@@ -13,8 +13,7 @@ import de.tud.in.middleware.dao.CustomerDAO;
 @WebService
 @Stateless
 @LocalBean
-public class CustomerManagement implements CustomerManagementRemote,
-		CustomerManagementLocal {
+public class CustomerManagement implements CustomerManagementRemote, CustomerManagementLocal {
 
 	@EJB
 	CustomerDAO customerDAO;
@@ -28,22 +27,22 @@ public class CustomerManagement implements CustomerManagementRemote,
 	}
 
 	@Override
-	public String getCustomerName(long id) {
+	public String getCustomerName(final Integer id) {
 		return customerDAO.getCustomerName(id);
 	}
 
 	@Override
-	public long addCustomer(String name, String eMail) {
+	public long addCustomer(final String name, final String eMail) {
 		return customerDAO.addCustomer(name, eMail);
 	}
 
 	@Override
-	public void changeCustomerName(long id, String name) {
+	public void changeCustomerName(final Integer id, final String name) {
 		customerDAO.changeCustomerName(id, name);
 	}
 
 	@Override
-	public void removeCustomer(long id) {
+	public void removeCustomer(final Integer id) {
 		customerDAO.removeCustomer(id);
 	}
 }

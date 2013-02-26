@@ -26,8 +26,8 @@ public class TruckDAO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void addShipmentToTruck(long truckId, Shipment shipment) {
-		Truck truck = (Truck) entityManager.find(Truck.class, (int) truckId);
+	public void addShipmentToTruck(final long truckId, final Shipment shipment) {
+		final Truck truck = entityManager.find(Truck.class, (int) truckId);
 		truck.addShipmentToTruck(shipment);
 
 		entityManager.persist(shipment);
@@ -35,37 +35,36 @@ public class TruckDAO {
 		entityManager.flush();
 	}
 
-	public void removeShipmentFromTrack(long truckId, long shipmentId) {
-		Truck truck = (Truck) entityManager.find(Truck.class, (int) truckId);
-		Shipment shipment = (Shipment) entityManager.find(Shipment.class,
-				shipmentId);
+	public void removeShipmentFromTrack(final long truckId, final long shipmentId) {
+		final Truck truck = entityManager.find(Truck.class, (int) truckId);
+		final Shipment shipment = entityManager.find(Shipment.class, shipmentId);
 
 		truck.removeShipmentFromTruck(shipment);
 		entityManager.persist(truck);
 	}
 
-	public void changeTruckPosition(long truckId, ShipmentPosition position) {
-		Truck truck = (Truck) entityManager.find(Truck.class, (int) truckId);
+	public void changeTruckPosition(final long truckId, final ShipmentPosition position) {
+		final Truck truck = entityManager.find(Truck.class, (int) truckId);
 		truck.setPosition(position);
 		entityManager.persist(truck);
 	}
 
-	public double getTruckLatitude(long truckId) {
-		Truck truck = (Truck) entityManager.find(Truck.class, (int) truckId);
+	public double getTruckLatitude(final long truckId) {
+		final Truck truck = entityManager.find(Truck.class, (int) truckId);
 		return truck.getPosition().getLastLatitude();
 	}
 
-	public double getTruckLongitude(long truckId) {
-		Truck truck = (Truck) entityManager.find(Truck.class, (int) truckId);
+	public double getTruckLongitude(final long truckId) {
+		final Truck truck = entityManager.find(Truck.class, (int) truckId);
 		return truck.getPosition().getLastLongitude();
 	}
 
 	public long createTruck() {
-		Truck truck = new Truck();
-		
+		final Truck truck = new Truck();
+
 		entityManager.persist(truck);
 		entityManager.flush();
-		
+
 		return truck.getId();
 	}
 }

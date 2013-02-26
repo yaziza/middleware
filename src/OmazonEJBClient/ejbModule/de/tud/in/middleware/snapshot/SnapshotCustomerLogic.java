@@ -19,7 +19,7 @@ public final class SnapshotCustomerLogic implements CustomerManagementRemote {
 	}
 
 	@Override
-	public String getCustomerName(final long id) {
+	public String getCustomerName(final Integer id) {
 		return customerMap.get(id).getName();
 	}
 
@@ -35,7 +35,7 @@ public final class SnapshotCustomerLogic implements CustomerManagementRemote {
 	 * Unsupported by snapshot.
 	 */
 	@Override
-	public void changeCustomerName(final long id, final String name) {
+	public void changeCustomerName(final Integer id, final String name) {
 		throw new UnsupportedOperationException("Snapshot is read only.");
 	}
 
@@ -43,7 +43,7 @@ public final class SnapshotCustomerLogic implements CustomerManagementRemote {
 	 * Unsupported by snapshot.
 	 */
 	@Override
-	public void removeCustomer(final long id) {
+	public void removeCustomer(final Integer id) {
 		throw new UnsupportedOperationException("Snapshot is read only.");
 	}
 

@@ -30,30 +30,26 @@ public class ShipmentDAO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public long getOrderId(long shipmentId) {
-		Shipment shipment = (Shipment) entityManager.find(Shipment.class,
-				(int) shipmentId);
+	public long getOrderId(final long shipmentId) {
+		final Shipment shipment = entityManager.find(Shipment.class, (int) shipmentId);
 		return shipment.getOrderId();
 	}
 
-	public ShipmentPosition getShipmentPosition(long shipmentId) {
-		Shipment shipment = (Shipment) entityManager.find(Shipment.class,
-				(int) shipmentId);
+	public ShipmentPosition getShipmentPosition(final long shipmentId) {
+		final Shipment shipment = entityManager.find(Shipment.class, (int) shipmentId);
 		return shipment.getPosition();
 	}
 
-	public void setShipmentPosition(long shipmentId, ShipmentPosition position) {
-		Shipment shipment = (Shipment) entityManager.find(Shipment.class,
-				(int) shipmentId);
+	public void setShipmentPosition(final long shipmentId, final ShipmentPosition position) {
+		final Shipment shipment = entityManager.find(Shipment.class, (int) shipmentId);
 
 		shipment.setPosition(position);
 		entityManager.persist(shipment);
 		entityManager.flush();
 	}
 
-	public void addOrderForShipment(long shipmentId, CustomerOrder order) {
-		Shipment shipment = (Shipment) entityManager.find(Shipment.class,
-				(int) shipmentId);
+	public void addOrderForShipment(final long shipmentId, final CustomerOrder order) {
+		final Shipment shipment = entityManager.find(Shipment.class, (int) shipmentId);
 		entityManager.persist(order);
 		shipment.setId(order.getId());
 		entityManager.persist(shipment);

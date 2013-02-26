@@ -1,9 +1,11 @@
 package de.tud.in.middleware.products;
 
 import java.io.Serializable;
-import java.lang.Integer;
-import java.lang.String;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Entity implementation class for Entity: Product
@@ -13,7 +15,7 @@ import javax.persistence.*;
 public class Product implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String description;
 	private static final long serialVersionUID = 1L;
@@ -22,24 +24,24 @@ public class Product implements Serializable {
 		super();
 	}
 
-	public Product(String description) {
+	public Product(final String description) {
 		super();
 		this.description = description;
 	}
-	
+
 	public Integer getId() {
-		return this.id;
+		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(final Integer id) {
 		this.id = id;
 	}
 
 	public String getDescription() {
-		return this.description;
+		return description;
 	}
 
-	public void setDescription(String description) {
+	public void setDescription(final String description) {
 		this.description = description;
 	}
 

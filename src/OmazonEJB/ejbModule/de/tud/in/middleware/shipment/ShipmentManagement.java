@@ -18,40 +18,44 @@ public class ShipmentManagement implements ShipmentManagementRemote {
 
 	@EJB
 	ShipmentDAO shipmentDAO;
-	
-    /**
-     * Default constructor. 
-     */
-    public ShipmentManagement() {
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-     * @see ShipmentManagementRemote#getOrderId(long)
-     */
-    public long getOrderId(long shipmentId) {
-    	return shipmentDAO.getOrderId(shipmentId);
-    }
+	 * Default constructor.
+	 */
+	public ShipmentManagement() {
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
-     * @see ShipmentManagementRemote#getShipmentPosition(long)
-     */
-    public ShipmentPosition getShipmentPosition(long shipmentId) {
+	 * @see ShipmentManagementRemote#getOrderId(long)
+	 */
+	@Override
+	public long getOrderId(final Integer shipmentId) {
+		return shipmentDAO.getOrderId(shipmentId);
+	}
+
+	/**
+	 * @see ShipmentManagementRemote#getShipmentPosition(long)
+	 */
+	@Override
+	public ShipmentPosition getShipmentPosition(final Integer shipmentId) {
 		return shipmentDAO.getShipmentPosition(shipmentId);
-    }
+	}
 
 	/**
-     * @see ShipmentManagementRemote#setShipmentPosition(long, ShipmentPosition)
-     */
-    public void setShipmentPosition(long shipmentId, ShipmentPosition position) {
-    	shipmentDAO.setShipmentPosition(shipmentId, position);
-    }
+	 * @see ShipmentManagementRemote#setShipmentPosition(long, ShipmentPosition)
+	 */
+	@Override
+	public void setShipmentPosition(final Integer shipmentId, final ShipmentPosition position) {
+		shipmentDAO.setShipmentPosition(shipmentId, position);
+	}
 
 	/**
-     * @see ShipmentManagementRemote#addOrderForShipment(Shipment, long)
-     */
-    public void addOrderForShipment(long shipmentId, CustomerOrder order) {
+	 * @see ShipmentManagementRemote#addOrderForShipment(Shipment, long)
+	 */
+	@Override
+	public void addOrderForShipment(final Integer shipmentId, final CustomerOrder order) {
 		shipmentDAO.addOrderForShipment(shipmentId, order);
-    }
+	}
 
 }

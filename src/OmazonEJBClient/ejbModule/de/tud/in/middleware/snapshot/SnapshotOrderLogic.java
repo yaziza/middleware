@@ -20,7 +20,7 @@ public final class SnapshotOrderLogic implements OrderManagementRemote {
 	 * Unsupported by snapshot.
 	 */
 	@Override
-	public long addOrderForCustomer(final List<ProductInstance> products, final long customerId) {
+	public long addOrderForCustomer(final List<ProductInstance> products, final Integer customerId) {
 		throw new UnsupportedOperationException("Snapshot is read only.");
 	}
 
@@ -28,17 +28,17 @@ public final class SnapshotOrderLogic implements OrderManagementRemote {
 	 * Unsupported by snapshot.
 	 */
 	@Override
-	public void changeOrderState(final long orderId, final OrderState newState) {
+	public void changeOrderState(final Integer orderId, final OrderState newState) {
 		throw new UnsupportedOperationException("Snapshot is read only.");
 	}
 
 	@Override
-	public OrderState getOrderState(final long orderId) {
+	public OrderState getOrderState(final Integer orderId) {
 		return orderMap.get(orderId).getState();
 	}
 
 	@Override
-	public String getOrderStateAsString(final long orderId) {
+	public String getOrderStateAsString(final Integer orderId) {
 		return getOrderState(orderId).toString();
 	}
 

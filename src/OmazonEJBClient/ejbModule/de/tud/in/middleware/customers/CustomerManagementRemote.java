@@ -7,12 +7,12 @@ public interface CustomerManagementRemote {
 
 	public long getNumberOfCustomers();
 
-	public String getCustomerName(long id);
+	public String getCustomerName(Integer id);
 
 	public long addCustomer(String name, String eMail);
 
-	public void changeCustomerName(long id, String name);
+	public void changeCustomerName(Integer id, String name);
 
-	public void removeCustomer(long id);
+	public void removeCustomer(Integer id);
 
 }

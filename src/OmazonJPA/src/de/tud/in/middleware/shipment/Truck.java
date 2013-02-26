@@ -1,12 +1,14 @@
 package de.tud.in.middleware.shipment;
 
-import de.tud.in.middleware.shipment.Shipment;
-import de.tud.in.middleware.shipment.ShipmentPosition;
 import java.io.Serializable;
-import java.lang.Integer;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * Entity implementation class for Entity: Truck
@@ -28,37 +30,37 @@ public class Truck implements Serializable {
 	}
 
 	public Integer getId() {
-		return this.id;
+		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(final Integer id) {
 		this.id = id;
 	}
 
 	public ShipmentPosition getPosition() {
-		return this.position;
+		return position;
 	}
 
-	public void setPosition(ShipmentPosition position) {
+	public void setPosition(final ShipmentPosition position) {
 		this.position = position;
 	}
 
 	@OneToMany(cascade = CascadeType.PERSIST)
 	public List<Shipment> getShipments() {
-		return this.shipments;
+		return shipments;
 	}
 
 	@OneToMany(cascade = CascadeType.PERSIST)
-	public void setShipments(List<Shipment> shipments) {
+	public void setShipments(final List<Shipment> shipments) {
 		this.shipments = shipments;
 	}
 
-	public void addShipmentToTruck(Shipment shipment) {
-		shipment.setPosition(this.position);
+	public void addShipmentToTruck(final Shipment shipment) {
+		shipment.setPosition(position);
 		shipments.add(shipment);
 	}
 
-	public void removeShipmentFromTruck(Shipment shipment) {
+	public void removeShipmentFromTruck(final Shipment shipment) {
 		shipments.remove(shipment);
 	}
 }

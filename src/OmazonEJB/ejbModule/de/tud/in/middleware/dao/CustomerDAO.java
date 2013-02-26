@@ -26,28 +26,26 @@ public class CustomerDAO {
 
 	public long getNumberOfCustomers() {
 		long result;
-		Query query = entityManager
-				.createQuery("select count(id) from Customer id");
+		final Query query = entityManager.createQuery("select count(id) from Customer id");
 		result = (Long) query.getSingleResult();
 		return result;
 	}
 
-	public String getCustomerName(long id) {
-		Customer customer = (Customer) entityManager.find(Customer.class,
-				(int) id);
-		if (customer == null)
+	public String getCustomerName(final long id) {
+		final Customer customer = entityManager.find(Customer.class, (int) id);
+		if (customer == null) {
 			return "Customer dont exist!";
+		}
 
 		return customer.getName();
 	}
 
-	public int addOrderForCustomer(long id, CustomerOrder order) {
-		Customer customer = (Customer) entityManager.find(Customer.class,
-				(int) id);
+	public int addOrderForCustomer(final long id, final CustomerOrder order) {
+		final Customer customer = entityManager.find(Customer.class, (int) id);
 
 		customer.getOrders().add(order);
 
-		for (ProductInstance pi : order.getProductInstances()) {
+		for (final ProductInstance pi : order.getProductInstances()) {
 			entityManager.persist(pi);
 		}
 		entityManager.persist(order);
@@ -58,8 +56,8 @@ public class CustomerDAO {
 		return order.getId();
 	}
 
-	public long addCustomer(String name, String eMail) {
-		Customer customer = new Customer(name);
+	public long addCustomer(final String name, final String eMail) {
+		final Customer customer = new Customer(name);
 		customer.setEMail(eMail);
 		entityManager.persist(customer);
 		entityManager.flush();
@@ -67,12 +65,12 @@ public class CustomerDAO {
 		return customer.getId();
 	}
 
-	public void changeCustomerName(long id, String name) {
-		Customer customer = (Customer) entityManager.find(Customer.class,
-				(int) id);
+	public void changeCustomerName(final long id, final String name) {
+		final Customer customer = entityManager.find(Customer.class, (int) id);
 
-		if (customer == null)
+		if (customer == null) {
 			return;
+		}
 
 		customer.setName(name);
 
@@ -80,12 +78,12 @@ public class CustomerDAO {
 		entityManager.flush();
 	}
 
-	public void removeCustomer(long id) {
-		Customer customer = (Customer) entityManager.find(Customer.class,
-				(int) id);
+	public void removeCustomer(final long id) {
+		final Customer customer = entityManager.find(Customer.class, (int) id);
 
-		if (customer == null)
+		if (customer == null) {
 			return;
+		}
 
 		entityManager.remove(customer);
 		entityManager.flush();

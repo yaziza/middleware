@@ -27,7 +27,7 @@ public final class SnapshotTruckLogic implements TruckManagementRemote {
 	 * Unsupported by snapshot.
 	 */
 	@Override
-	public void addShipmentToTruck(final long truckId, final Shipment shipment) {
+	public void addShipmentToTruck(final Integer truckId, final Shipment shipment) {
 		throw new UnsupportedOperationException("Snapshot is read only.");
 	}
 
@@ -35,7 +35,7 @@ public final class SnapshotTruckLogic implements TruckManagementRemote {
 	 * Unsupported by snapshot.
 	 */
 	@Override
-	public void removeShipmentFromTrack(final long truckId, final long shipmentId) {
+	public void removeShipmentFromTrack(final Integer truckId, final Integer shipmentId) {
 		throw new UnsupportedOperationException("Snapshot is read only.");
 	}
 
@@ -43,17 +43,17 @@ public final class SnapshotTruckLogic implements TruckManagementRemote {
 	 * Unsupported by snapshot.
 	 */
 	@Override
-	public void changeTruckPosition(final long truckId, final ShipmentPosition position) {
+	public void changeTruckPosition(final Integer truckId, final ShipmentPosition position) {
 		throw new UnsupportedOperationException("Snapshot is read only.");
 	}
 
 	@Override
-	public double getTruckLatitude(final long truckId) {
+	public double getTruckLatitude(final Integer truckId) {
 		return truckMap.get(truckId).getPosition().getLastLatitude();
 	}
 
 	@Override
-	public double getTruckLongitude(final long truckId) {
+	public double getTruckLongitude(final Integer truckId) {
 		return truckMap.get(truckId).getPosition().getLastLongitude();
 	}
 

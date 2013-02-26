@@ -25,27 +25,27 @@ public class ProductDAO {
 
 	public long getNumberOfProducts() {
 		long result;
-		Query query = entityManager
-				.createQuery("select count(id) from Product id");
+		final Query query = entityManager.createQuery("select count(id) from Product id");
 		result = (Long) query.getSingleResult();
 		return result;
 	}
 
-	public String getProductDescription(long id) {
-		Product product = (Product) entityManager.find(Product.class, (int) id);
-		if (product == null)
+	public String getProductDescription(final long id) {
+		final Product product = entityManager.find(Product.class, (int) id);
+		if (product == null) {
 			return "Product dont exist!";
+		}
 
 		return product.getDescription();
 	}
 
-	public Product getProduct(long id) {
-		Product product = (Product) entityManager.find(Product.class, (int) id);
+	public Product getProduct(final long id) {
+		final Product product = entityManager.find(Product.class, (int) id);
 		return product;
 	}
 
-	public long addProduct(String description) {
-		Product product = new Product(description);
+	public long addProduct(final String description) {
+		final Product product = new Product(description);
 		entityManager.persist(product);
 		entityManager.flush();
 
@@ -54,20 +54,20 @@ public class ProductDAO {
 
 	@SuppressWarnings("unchecked")
 	public List<Product> getProducts() {
-		Query query = entityManager.createQuery("SELECT e FROM Product e");
-		return (List<Product>) query.getResultList();
+		final Query query = entityManager.createQuery("SELECT e FROM Product e");
+		return query.getResultList();
 	}
 
-	public void changeProductDescription(long id, String description) {
-		Product product = (Product) entityManager.find(Product.class, (int) id);
+	public void changeProductDescription(final long id, final String description) {
+		final Product product = entityManager.find(Product.class, (int) id);
 		product.setDescription(description);
 
 		entityManager.persist(product);
 		entityManager.flush();
 	}
 
-	public void removeProduct(long id) {
-		Product product = (Product) entityManager.find(Product.class, (int) id);
+	public void removeProduct(final long id) {
+		final Product product = entityManager.find(Product.class, (int) id);
 
 		entityManager.remove(product);
 		entityManager.flush();

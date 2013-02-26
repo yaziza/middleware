@@ -21,50 +21,50 @@ import de.tud.in.middleware.order.CustomerOrder;
 public class Customer implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	private String name;
 	private String eMail;
 	private List<CustomerOrder> orders;
-	
+
 	private static final long serialVersionUID = 1L;
 
 	public Customer() {
 		super();
-		
+
 		orders = new ArrayList<CustomerOrder>();
 	}
-	
-	public Customer(String name) {
+
+	public Customer(final String name) {
 		super();
 		this.name = name;
 	}
 
 	public Integer getId() {
-		return this.id;
+		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(final Integer id) {
 		this.id = id;
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
-	
+
 	public String getEMail() {
 		return eMail;
 	}
-	
-	public void setEMail(String eMail) {
+
+	public void setEMail(final String eMail) {
 		this.eMail = eMail;
 	}
-	
-	@OneToMany(cascade=CascadeType.PERSIST)
+
+	@OneToMany(cascade = CascadeType.PERSIST)
 	public List<CustomerOrder> getOrders() {
 		return orders;
 	}

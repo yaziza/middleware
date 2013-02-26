@@ -22,43 +22,43 @@ public class OrderDAO {
 	private EntityManager entityManager;
 	@EJB
 	private CustomerDAO customerDAO;
-	
-	public OrderDAO(){
+
+	public OrderDAO() {
 		// nothing to do
 	}
 
 	/**
 	 * @return Returns added order.
 	 */
-	public CustomerOrder addOrder(List<ProductInstance> products, long customerId) {
-		CustomerOrder order = new CustomerOrder();
+	public CustomerOrder addOrder(final List<ProductInstance> products, final long customerId) {
+		final CustomerOrder order = new CustomerOrder();
 		order.setState(OrderState.INIT);
 		// XXX long int
-		Customer customer = (Customer) entityManager.find(Customer.class, (int) customerId);
+		final Customer customer = entityManager.find(Customer.class, (int) customerId);
 		order.setCustomer(customer);
-		
-		MailHandler.sendMail(customer.getEMail(), "Order Confirmation Omazon", "<H2>Dear " + customer.getName() + "</H2>Your order is confirmed.");
-		
-		
+
+		MailHandler.sendMail(customer.getEMail(), "Order Confirmation Omazon", "<H2>Dear " + customer.getName()
+				+ "</H2>Your order is confirmed.");
+
 		customerDAO.addOrderForCustomer(customerId, order);
-		
+
 		entityManager.persist(order);
 		entityManager.flush();
 		return order;
 	}
 
-	public void changeOrderState(long orderId, OrderState newState) {
+	public void changeOrderState(final long orderId, final OrderState newState) {
 		// XXX long int
-		CustomerOrder order = getOrder(orderId);
+		final CustomerOrder order = getOrder(orderId);
 		order.setState(newState);
 	}
 
-	private CustomerOrder getOrder(long orderId) {
-		CustomerOrder order = entityManager.find(CustomerOrder.class, (int) orderId);
+	private CustomerOrder getOrder(final long orderId) {
+		final CustomerOrder order = entityManager.find(CustomerOrder.class, (int) orderId);
 		return order;
 	}
 
-	public OrderState getOrderState(long orderId) {
+	public OrderState getOrderState(final long orderId) {
 		// XXX How do we want to handle null ?
 		return getOrder(orderId).getState();
 	}

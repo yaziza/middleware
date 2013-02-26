@@ -26,24 +26,24 @@ public class OrderManagement implements OrderManagementRemote, OrderManagementLo
 	}
 
 	@Override
-	public long addOrderForCustomer(final List<ProductInstance> products, final long customerId) {
+	public long addOrderForCustomer(final List<ProductInstance> products, final Integer customerId) {
 		final CustomerOrder order = orderDAO.addOrder(products, customerId);
 
 		return order.getId();
 	}
 
 	@Override
-	public void changeOrderState(final long orderId, final OrderState newState) {
+	public void changeOrderState(final Integer orderId, final OrderState newState) {
 		orderDAO.changeOrderState(orderId, newState);
 	}
 
 	@Override
-	public OrderState getOrderState(final long orderId) {
+	public OrderState getOrderState(final Integer orderId) {
 		return orderDAO.getOrderState(orderId);
 	}
 
 	@Override
-	public String getOrderStateAsString(final long orderId) {
+	public String getOrderStateAsString(final Integer orderId) {
 		final OrderState state = getOrderState(orderId);
 		return state.toString();
 	}

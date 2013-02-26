@@ -1,7 +1,11 @@
 package de.tud.in.middleware.shipment;
 
 import java.io.Serializable;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * Entity implementation class for Entity: Shipment
@@ -26,7 +30,7 @@ public class Shipment implements Serializable {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(final Integer id) {
 		this.id = id;
 	}
 
@@ -34,7 +38,7 @@ public class Shipment implements Serializable {
 		return position;
 	}
 
-	public void setPosition(ShipmentPosition position) {
+	public void setPosition(final ShipmentPosition position) {
 		this.position = position;
 	}
 
@@ -42,7 +46,7 @@ public class Shipment implements Serializable {
 		return orderId;
 	}
 
-	public void setOrderId(Integer orderId) {
+	public void setOrderId(final Integer orderId) {
 		this.orderId = orderId;
 	}
 }

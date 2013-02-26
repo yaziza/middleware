@@ -13,14 +13,14 @@ public final class ProductInstance implements Serializable {
 	private Integer id;
 	private Product product;
 	private int amount;
-	
+
 	private static final long serialVersionUID = 1L;
 
 	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(final Integer id) {
 		this.id = id;
 	}
 
@@ -28,7 +28,7 @@ public final class ProductInstance implements Serializable {
 		return product;
 	}
 
-	public void setProduct(Product product) {
+	public void setProduct(final Product product) {
 		this.product = product;
 	}
 
@@ -36,7 +36,7 @@ public final class ProductInstance implements Serializable {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(final int amount) {
 		this.amount = amount;
 	}
 }

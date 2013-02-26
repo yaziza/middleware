@@ -15,8 +15,7 @@ import de.tud.in.middleware.dao.ProductDAO;
 @WebService
 @Stateless
 @LocalBean
-public class ProductManagement implements ProductManagementRemote,
-		ProductManagementLocal {
+public class ProductManagement implements ProductManagementRemote, ProductManagementLocal {
 
 	@EJB
 	ProductDAO productDAO;
@@ -30,12 +29,12 @@ public class ProductManagement implements ProductManagementRemote,
 	}
 
 	@Override
-	public String getProductDescription(long id) {
+	public String getProductDescription(final Integer id) {
 		return productDAO.getProductDescription(id);
 	}
 
 	@Override
-	public long addProduct(String description) {
+	public long addProduct(final String description) {
 		return productDAO.addProduct(description);
 	}
 
@@ -45,17 +44,17 @@ public class ProductManagement implements ProductManagementRemote,
 	}
 
 	@Override
-	public Product getProduct(long id) {
+	public Product getProduct(final Integer id) {
 		return productDAO.getProduct(id);
 	}
 
 	@Override
-	public void changeProductDescription(long id, String description) {
+	public void changeProductDescription(final Integer id, final String description) {
 		productDAO.changeProductDescription(id, description);
 	}
 
 	@Override
-	public void removeProduct(long id) {
+	public void removeProduct(final Integer id) {
 		productDAO.removeProduct(id);
 	}
 }

@@ -50,7 +50,7 @@ public class PositionEventMessageDrivenBean implements MessageListener {
 	}
 
 	private void handleRequest(final Document document) {
-		long truckId;
+		Integer truckId;
 		Double latitude;
 		Double longitude;
 		// TODO Hier noch ein wenig das Format überprüfen (heist das feld
@@ -59,7 +59,7 @@ public class PositionEventMessageDrivenBean implements MessageListener {
 		final String latStr = EventUtil.getNodeContent(document, "lat");
 		final String longStr = EventUtil.getNodeContent(document, "long");
 
-		truckId = Long.parseLong(truckIdStr);
+		truckId = Integer.parseInt(truckIdStr);
 		longitude = Double.parseDouble(longStr);
 		latitude = Double.parseDouble(latStr);
 

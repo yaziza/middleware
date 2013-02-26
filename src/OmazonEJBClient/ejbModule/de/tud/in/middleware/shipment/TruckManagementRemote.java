@@ -7,14 +7,14 @@ public interface TruckManagementRemote {
 
 	public long createTruck();
 
-	public void addShipmentToTruck(long truckId, Shipment shipment);
+	public void addShipmentToTruck(Integer truckId, Shipment shipment);
 
-	public void removeShipmentFromTrack(long truckId, long shipmentId);
+	public void removeShipmentFromTrack(Integer truckId, Integer shipmentId);
 
-	public void changeTruckPosition(long truckId, ShipmentPosition position);
+	public void changeTruckPosition(Integer truckId, ShipmentPosition position);
 
-	public double getTruckLatitude(long truckId);
+	public double getTruckLatitude(Integer truckId);
 
-	public double getTruckLongitude(long truckId);
+	public double getTruckLongitude(Integer truckId);
 
 }
