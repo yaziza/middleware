@@ -45,9 +45,6 @@ public class OrderManagement implements OrderManagementRemote, OrderManagementLo
 	@Override
 	public String getOrderStateAsString(final long orderId) {
 		final OrderState state = getOrderState(orderId);
-		if (state == OrderState.EXCEPTION) {
-			return String.format("%s - %s", state, state.exceptionDescription);
-		}
 		return state.toString();
 	}
 
