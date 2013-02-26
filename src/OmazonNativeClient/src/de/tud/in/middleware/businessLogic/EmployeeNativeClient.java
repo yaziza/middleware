@@ -11,12 +11,14 @@ import javax.naming.NamingException;
 import de.tud.in.middleware.customers.CustomerManagementRemote;
 import de.tud.in.middleware.order.OrderManagementRemote;
 import de.tud.in.middleware.products.ProductManagementRemote;
+import de.tud.in.middleware.snapshot.MobileClient;
+import de.tud.in.middleware.snapshot.Snapshot;
 
 /**
  * 
  * @author yasser
  */
-public class EmployeeNativeClient extends javax.swing.JFrame {
+public class EmployeeNativeClient extends javax.swing.JFrame implements MobileClient{
 
 	/**
 	 * 
@@ -326,4 +328,10 @@ public class EmployeeNativeClient extends javax.swing.JFrame {
 	private javax.swing.JTextField productDescriptionTextField;
 	private javax.swing.JPanel productPanel;
 	// End of variables declaration//GEN-END:variables
+
+	@Override
+	public boolean updateSnapshot(Snapshot snap) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
