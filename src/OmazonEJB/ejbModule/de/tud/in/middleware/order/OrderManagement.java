@@ -26,7 +26,7 @@ public class OrderManagement implements OrderManagementRemote, OrderManagementLo
 	}
 
 	@Override
-	public long addOrderForCustomer(final List<ProductInstance> products, final Integer customerId) {
+	public Integer addOrderForCustomer(final List<ProductInstance> products, final Integer customerId) {
 		final CustomerOrder order = orderDAO.addOrder(products, customerId);
 
 		return order.getId();

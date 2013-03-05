@@ -14,7 +14,7 @@
 	Context ctx;
 
 	TruckManagementRemote truckManagement = null;
-	long truckId = 0;
+	Integer truckId = 0;
 	double latitude = 0;
 	double longitude = 0;
 
@@ -30,7 +30,7 @@
 		String longitudeStr = request.getParameter("longitude");
 
 		try {
-			truckId = Long.parseLong(truckIdStr);
+			truckId = Integer.parseInt(truckIdStr);
 			latitude = Double.parseDouble(latitudeStr);
 			longitude = Double.parseDouble(longitudeStr);
 

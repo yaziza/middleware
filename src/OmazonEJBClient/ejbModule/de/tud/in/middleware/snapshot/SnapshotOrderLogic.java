@@ -20,7 +20,7 @@ public final class SnapshotOrderLogic implements OrderManagementRemote {
 	 * Unsupported by snapshot.
 	 */
 	@Override
-	public long addOrderForCustomer(final List<ProductInstance> products, final Integer customerId) {
+	public Integer addOrderForCustomer(final List<ProductInstance> products, final Integer customerId) {
 		throw new UnsupportedOperationException("Snapshot is read only.");
 	}
 

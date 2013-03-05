@@ -15,7 +15,7 @@
 
 	TruckManagementRemote truckManagement = null;
 
-	long truckId = 0;
+	Integer truckId = 0;
 	double latitude = 0;
 	double longitude = 0;
 
@@ -30,7 +30,7 @@
 
 
 		try {
-			truckId = Long.parseLong(truckIdStr);
+			truckId = Integer.parseInt(truckIdStr);
 		} catch (NumberFormatException e) {
 			out.println(ERROR_MSG + "(Invalid TruckId Format)");
 			return;

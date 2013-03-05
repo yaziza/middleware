@@ -16,7 +16,7 @@
 
 	OrderManagementRemote omr = null;
 	ProductManagementRemote pmr = null;
-	long orderId = 0;
+	Integer orderId = 0;
 	OrderState newOrderState = null;
 	
 	try {
@@ -33,7 +33,7 @@
 		String orderStateStr =  request.getParameter("orderState");
 		
 		try {
-			orderId = Long.parseLong(orderIdStr);
+			orderId = Integer.parseInt(orderIdStr);
 		} catch(NumberFormatException e) {
 			out.println(ERROR_MSG + "(Invalid OrderId Format)");
 			return;

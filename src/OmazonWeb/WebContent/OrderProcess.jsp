@@ -36,9 +36,9 @@
 
 <%
 	String customerIdStr = request.getParameter("customerId");
-	long customerId;
+	Integer customerId;
 	try {
-		customerId = Long.parseLong(customerIdStr);
+		customerId = Integer.parseInt(customerIdStr);
 	} catch(NumberFormatException e) {
 		out.println(ERROR_MSG + "(Invalid CustomerId Format)");
 		return;

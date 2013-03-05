@@ -18,7 +18,7 @@
 
 	OrderManagementRemote omr = null;
 	ProductManagementRemote pmr = null;
-	long orderId = 0;
+	Integer orderId = 0;
 
 	try {
 		ctx = new InitialContext();
@@ -31,9 +31,9 @@
 
 		// Kundennummer einlesen
 		String customerIdStr = request.getParameter("customerId");
-		long customerId;
+		Integer customerId;
 		try {
-			customerId = Long.parseLong(customerIdStr);
+			customerId = Integer.parseInt(customerIdStr);
 		} catch (NumberFormatException e) {
 			out.println(ERROR_MSG + "(Invalid CustomerId Format)");
 			return;
@@ -47,7 +47,7 @@
 				try {
 					ProductInstance productInstance = new ProductInstance();
 
-					long productId = Long.parseLong(s);
+					Integer productId = Integer.parseInt(s);
 					Product product = pmr.getProduct(productId);
 					productInstance.setProduct(product);
 
