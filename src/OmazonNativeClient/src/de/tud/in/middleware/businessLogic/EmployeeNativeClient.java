@@ -330,7 +330,13 @@ public class EmployeeNativeClient extends javax.swing.JFrame implements MobileCl
 	// End of variables declaration//GEN-END:variables
 
 	@Override
-	public boolean updateSnapshot(Snapshot snap) {
+	public boolean prepareToUpdateSnapshot(Snapshot snap) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateToSnapshot(Integer id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
