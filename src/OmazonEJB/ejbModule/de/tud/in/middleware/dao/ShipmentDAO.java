@@ -1,10 +1,13 @@
 package de.tud.in.middleware.dao;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import de.tud.in.middleware.order.CustomerOrder;
 import de.tud.in.middleware.shipment.Shipment;
@@ -56,4 +59,9 @@ public class ShipmentDAO {
 		entityManager.flush();
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Shipment> getShipments() {
+		final Query query = entityManager.createQuery("SELECT e FROM Shipment e");
+		return query.getResultList();
+	}
 }

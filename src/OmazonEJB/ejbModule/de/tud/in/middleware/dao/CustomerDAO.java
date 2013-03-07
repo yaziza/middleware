@@ -1,5 +1,7 @@
 package de.tud.in.middleware.dao;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -89,4 +91,9 @@ public class CustomerDAO {
 		entityManager.flush();
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Customer> getCustomers() {
+		final Query query = entityManager.createQuery("SELECT e FROM Customer e");
+		return query.getResultList();
+	}
 }

@@ -1,9 +1,12 @@
 package de.tud.in.middleware.dao;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import de.tud.in.middleware.shipment.Shipment;
 import de.tud.in.middleware.shipment.ShipmentPosition;
@@ -66,5 +69,11 @@ public class TruckDAO {
 		entityManager.flush();
 
 		return truck.getId();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Truck> getTrucks() {
+		final Query query = entityManager.createQuery("SELECT e FROM Truck e");
+		return query.getResultList();
 	}
 }

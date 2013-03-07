@@ -24,7 +24,7 @@ public final class Snapshot implements Serializable {
 	private static final long serialVersionUID = 256725257655723524L;
 	private static final Random rand = new Random();
 
-	public final long id = rand.nextLong();
+	public final Integer id = rand.nextInt();
 
 	public final SnapshotCustomerLogic customerManagment;
 	public final SnapshotOrderLogic orderManagment;

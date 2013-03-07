@@ -7,6 +7,7 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import de.tud.in.middleware.customers.Customer;
 import de.tud.in.middleware.mail.MailHandler;
@@ -61,5 +62,11 @@ public class OrderDAO {
 	public OrderState getOrderState(final long orderId) {
 		// XXX How do we want to handle null ?
 		return getOrder(orderId).getState();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<CustomerOrder> getOrders() {
+		final Query query = entityManager.createQuery("SELECT e FROM CustomerOrder e");
+		return query.getResultList();
 	}
 }
