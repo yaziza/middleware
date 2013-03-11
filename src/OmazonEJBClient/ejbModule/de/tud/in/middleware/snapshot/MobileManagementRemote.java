@@ -4,6 +4,8 @@ import javax.ejb.Remote;
 
 @Remote
 public interface MobileManagementRemote {
+	public static final String PREPARE_MSG_TYPE = "PrepareSnap";
+	public static final String UPDATE_MSG_TYPE = "UpdateToSnap";
 
 	/**
 	 * Registers calling mobile client. Every mobile client must call this, so a snapshot can be distributed to all
