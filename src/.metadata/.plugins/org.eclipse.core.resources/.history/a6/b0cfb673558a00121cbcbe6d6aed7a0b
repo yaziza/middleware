@@ -1,0 +1,20 @@
+package de.tud.in.middleware.snapshot;
+
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
+/**
+ * Session Bean implementation class EmployeeClientProxy
+ */
+@Stateless
+@LocalBean
+public class EmployeeClientProxy implements EmployeeClientProxyRemote, EmployeeClientProxyLocal {
+
+    /**
+     * Default constructor. 
+     */
+    public EmployeeClientProxy() {
+        // TODO Auto-generated constructor stub
+    }
+
+}

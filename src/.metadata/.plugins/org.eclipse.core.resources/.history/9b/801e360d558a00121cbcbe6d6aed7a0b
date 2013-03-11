@@ -1,0 +1,38 @@
+package de.tud.in.middleware.snapshot;
+
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+
+/**
+ * Session Bean implementation class MobileManagement
+ */
+@Stateless
+@LocalBean
+public class MobileManagement implements MobileManagementRemote, MobileManagementLocal {
+
+    /**
+     * Default constructor. 
+     */
+    public MobileManagement() {
+        // TODO Auto-generated constructor stub
+    }
+
+	@Override
+	public void registerMyself(EmployeeClientProxy client) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void unregisterMyself(EmployeeClientProxy client) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void requestSnapshot() {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

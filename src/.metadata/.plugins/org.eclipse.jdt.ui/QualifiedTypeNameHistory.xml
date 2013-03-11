@@ -3,10 +3,22 @@
 <fullyQualifiedTypeName name="javax.jws.WebService"/>
 <fullyQualifiedTypeName name="javax.persistence.EntityManager"/>
 <fullyQualifiedTypeName name="javax.persistence.Query"/>
-<fullyQualifiedTypeName name="javax.ejb.EJB"/>
 <fullyQualifiedTypeName name="de.tud.in.middleware.dao.costumers.CostumerDAO"/>
 <fullyQualifiedTypeName name="java.util.Formatter"/>
 <fullyQualifiedTypeName name="de.tud.in.middleware.costumers.Costumer"/>
-<fullyQualifiedTypeName name="de.tud.in.middleware.products.Product"/>
 <fullyQualifiedTypeName name="de.tud.in.middleware.dao.products.ProductDAO"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="java.util.Set"/>
+<fullyQualifiedTypeName name="javax.ejb.EJB"/>
+<fullyQualifiedTypeName name="de.tud.in.middleware.dao.CustomerDAO"/>
+<fullyQualifiedTypeName name="de.tud.in.middleware.dao.OrderDAO"/>
+<fullyQualifiedTypeName name="de.tud.in.middleware.dao.ProductDAO"/>
+<fullyQualifiedTypeName name="de.tud.in.middleware.dao.ShipmentDAO"/>
+<fullyQualifiedTypeName name="de.tud.in.middleware.dao.TruckDAO"/>
+<fullyQualifiedTypeName name="de.tud.in.middleware.customers.Customer"/>
+<fullyQualifiedTypeName name="de.tud.in.middleware.products.Product"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="de.tud.in.middleware.shipment.Shipment"/>
+<fullyQualifiedTypeName name="de.tud.in.middleware.order.CustomerOrder"/>
+<fullyQualifiedTypeName name="de.tud.in.middleware.shipment.Truck"/>
 </qualifiedTypeNameHistroy>

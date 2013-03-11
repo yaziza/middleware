@@ -3,9 +3,10 @@ package de.tud.in.middleware.snapshot;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 
 import javax.ejb.EJB;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 
 import de.tud.in.middleware.customers.Customer;
 import de.tud.in.middleware.dao.CustomerDAO;
@@ -18,8 +19,14 @@ import de.tud.in.middleware.products.Product;
 import de.tud.in.middleware.shipment.Shipment;
 import de.tud.in.middleware.shipment.Truck;
 
-public final class MobileManagment implements MobileManagementRemote {
-	private static final Logger logger = Logger.getGlobal();
+/**
+ * Session Bean implementation class MobileManagement
+ */
+@Stateless
+@LocalBean
+public class MobileManagment implements MobileManagementRemote,
+		MobileManagementLocal {
+
 	private final Set<EmployeeClientProxy> mobileClients = new HashSet<EmployeeClientProxy>();
 
 	@EJB
@@ -43,7 +50,8 @@ public final class MobileManagment implements MobileManagementRemote {
 		mobileClients.remove(client);
 	}
 
-	// XXX I assumed we will use timeout at client side, so no explicit aborts are done here.
+	// XXX I assumed we will use timeout at client side, so no explicit aborts
+	// are done here.
 	@Override
 	public void requestSnapshot() {
 		final Snapshot snap = getSnapshot();
@@ -51,14 +59,14 @@ public final class MobileManagment implements MobileManagementRemote {
 			for (final EmployeeClientProxy client : mobileClients) {
 				final boolean voteCommit = client.prepareToUpdateSnapshot(snap);
 				if (!voteCommit) {
-					logger.warning("Distributing snapshot failed in first phase.");
+					// logger.warning("Distributing snapshot failed in first phase.");
 					return;
 				}
 			}
 			for (final MobileClient client : mobileClients) {
 				final boolean ack = client.updateToSnapshot(snap.id);
 				if (!ack) {
-					logger.warning("Distributing snapshot failed in second phase.");
+					// logger.warning("Distributing snapshot failed in second phase.");
 					return;
 				}
 			}

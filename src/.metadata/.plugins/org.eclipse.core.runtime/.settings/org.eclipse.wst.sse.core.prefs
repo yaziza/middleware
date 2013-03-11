@@ -1,2 +1,2 @@
 eclipse.preferences.version=1
-task-tag-projects-already-scanned=OmazonERP,OmazonEJB,OmazonEJBClient,OmazonJPA,OmazonWeb,com.eads.iw.protas.server.ef
+task-tag-projects-already-scanned=OmazonERP,OmazonEJB,OmazonEJBClient,OmazonJPA,OmazonWeb,OmazonNativeClient
