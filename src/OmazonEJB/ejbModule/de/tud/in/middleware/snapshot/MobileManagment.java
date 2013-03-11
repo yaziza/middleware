@@ -115,15 +115,19 @@ public class MobileManagment implements MobileManagementRemote {
 		new Thread() {
 			@Override
 			public void run() {
-				synchronized (mobileClients) {
-					while (acknowledgedCommit != null && acknowledgedCommit.snapshotID == id) {
-						try {
-							sleep(ClientSessionSet.TIMEOUT_LIMIT_MILIS);
+
+				while (true) {
+					try {
+						sleep(ClientSessionSet.TIMEOUT_LIMIT_MILIS);
+						synchronized (mobileClients) {
+							if (acknowledgedCommit == null || acknowledgedCommit.snapshotID != id) {
+								return;
+							}
 							checkGlobalAcks();
-						} catch (final InterruptedException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
 						}
+					} catch (final InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 				}
 			}
