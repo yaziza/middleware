@@ -8,7 +8,4 @@ public class JNDINames {
 	public static final String TRUCK_NAME = "de.tud.in.middleware.shipment.TruckManagementRemote#de.tud.in.middleware.shipment.TruckManagementRemote";
 	public static final String SNAPSHOT_NAME = "de.tud.in.middleware.snapshot.MobileManagementRemote#de.tud.in.middleware.snapshot.MobileManagementRemote";
 	
-	public static final String JMS_PREPARE = "prepare";
-	public static final String JMS_UPDATE = "update";
-	
 }

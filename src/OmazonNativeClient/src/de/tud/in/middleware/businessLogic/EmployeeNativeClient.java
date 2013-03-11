@@ -10,6 +10,7 @@ import javax.ejb.MessageDriven;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
+import javax.jms.ObjectMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -31,8 +32,8 @@ public class EmployeeNativeClient extends javax.swing.JFrame implements
 	private static final long serialVersionUID = 6980324852035605024L;
 
 	private MobileManagementRemote mobileManagment;
-	private final SnapshotRingBuffer preparedSnapshots = new SnapshotRingBuffer(
-			5);
+	private final SnapshotRingBuffer preparedSnapshots = new SnapshotRingBuffer(3);
+	// TODO Use this snapshot to support read-only operations locally.
 	private Snapshot currentSnapshot;
 
 	private final Integer clientID = new Random().nextInt();
@@ -49,15 +50,41 @@ public class EmployeeNativeClient extends javax.swing.JFrame implements
 
 	@Override
 	public void onMessage(Message message) {
+		ObjectMessage objMsg;
+		if (message instanceof ObjectMessage) {
+			objMsg = (ObjectMessage) message;
+		} else {
+			System.err.println("Unknown message object in MobileClient queue.");
+			return;
+		}
+
 		try {
-			if (message.getJMSType().equals(JNDINames.JMS_PREPARE)) {
-				mobileManagment.voteCommit(clientID, 0 , true);
-			} else if (message.getJMSType().equals(JNDINames.JMS_UPDATE)) {
-				mobileManagment.requestSnapshot();
+			if (objMsg.getJMSType().equals(MobileManagementRemote.PREPARE_MSG_TYPE)) {
+				handlePrepareSnapshot((Snapshot) objMsg.getObject());
+			} else if (message.getJMSType().equals(MobileManagementRemote.UPDATE_MSG_TYPE)) {
+				handleUpdateToSnapshot((Integer) objMsg.getObject());
+			} else {
+				System.err.println("Unknown message type in MobileClient queue.");
+				return;
 			}
 		} catch (JMSException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+
+	private void handlePrepareSnapshot(Snapshot snap) {
+		preparedSnapshots.add(snap);
+		mobileManagment.voteCommit(clientID, snap.id , true);
+	}
+
+	private void handleUpdateToSnapshot(Integer snapId) {
+		Snapshot snap = preparedSnapshots.getSnapshot(snapId);
+		if(snap != null){
+			currentSnapshot = snap;
+			mobileManagment.ackGlobalCommit(clientID, snapId, true);
+		}else{
+			mobileManagment.ackGlobalCommit(clientID, snapId, false);
 		}
 	}
 
