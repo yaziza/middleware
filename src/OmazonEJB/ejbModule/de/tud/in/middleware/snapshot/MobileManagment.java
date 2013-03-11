@@ -20,7 +20,7 @@ import de.tud.in.middleware.shipment.Truck;
 
 public final class MobileManagment implements MobileManagementRemote {
 	private static final Logger logger = Logger.getGlobal();
-	private final Set<MobileClient> mobileClients = new HashSet<MobileClient>();
+	private final Set<EmployeeClientProxy> mobileClients = new HashSet<EmployeeClientProxy>();
 
 	@EJB
 	CustomerDAO customerDAO;
@@ -34,14 +34,13 @@ public final class MobileManagment implements MobileManagementRemote {
 	TruckDAO truckDAO;
 
 	@Override
-	public void registerMyself() {
-		// TODO Auto-generated method stub
+	public void registerMyself(EmployeeClientProxy client) {
+		mobileClients.add(client);
 	}
 
 	@Override
-	public void unregisterMyself() {
-		// TODO Auto-generated method stub
-
+	public void unregisterMyself(EmployeeClientProxy client) {
+		mobileClients.remove(client);
 	}
 
 	// XXX I assumed we will use timeout at client side, so no explicit aborts are done here.
@@ -49,7 +48,7 @@ public final class MobileManagment implements MobileManagementRemote {
 	public void requestSnapshot() {
 		final Snapshot snap = getSnapshot();
 		synchronized (mobileClients) {
-			for (final MobileClient client : mobileClients) {
+			for (final EmployeeClientProxy client : mobileClients) {
 				final boolean voteCommit = client.prepareToUpdateSnapshot(snap);
 				if (!voteCommit) {
 					logger.warning("Distributing snapshot failed in first phase.");

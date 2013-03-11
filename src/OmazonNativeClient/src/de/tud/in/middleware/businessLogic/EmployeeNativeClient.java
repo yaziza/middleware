@@ -11,19 +11,24 @@ import javax.naming.NamingException;
 import de.tud.in.middleware.customers.CustomerManagementRemote;
 import de.tud.in.middleware.order.OrderManagementRemote;
 import de.tud.in.middleware.products.ProductManagementRemote;
+import de.tud.in.middleware.snapshot.EmployeeClientProxy;
 import de.tud.in.middleware.snapshot.MobileClient;
+import de.tud.in.middleware.snapshot.MobileManagementRemote;
 import de.tud.in.middleware.snapshot.Snapshot;
 
 /**
  * 
  * @author yasser
  */
-public class EmployeeNativeClient extends javax.swing.JFrame implements MobileClient{
+public class EmployeeNativeClient extends javax.swing.JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6980324852035605024L;
+	
+	private final EmployeeClientProxy clientProxy = new EmployeeClientProxy();
+	private MobileManagementRemote mobileManagment;
 
 	/**
 	 * Creates new form EmployeNativeClient
@@ -42,6 +47,9 @@ public class EmployeeNativeClient extends javax.swing.JFrame implements MobileCl
 		customerManagementRemote = (CustomerManagementRemote) context.lookup(JNDINames.CUSTOMER_NAME);
 
 		orderManagementRemote = (OrderManagementRemote) context.lookup(JNDINames.ORDER_NAME);
+		mobileManagment = (MobileManagementRemote) context.lookup(JNDINames.SNAPSHOT_NAME);
+		
+		mobileManagment.registerMyself(clientProxy);
 	}
 
 	/**
@@ -328,16 +336,5 @@ public class EmployeeNativeClient extends javax.swing.JFrame implements MobileCl
 	private javax.swing.JTextField productDescriptionTextField;
 	private javax.swing.JPanel productPanel;
 	// End of variables declaration//GEN-END:variables
-
-	@Override
-	public boolean prepareToUpdateSnapshot(Snapshot snap) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean updateToSnapshot(Integer id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 }
