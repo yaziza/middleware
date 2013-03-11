@@ -6,8 +6,8 @@ import javax.ejb.Remote;
 public interface MobileManagementRemote {
 
 	/**
-	 * Registers calling mobile client. Every mobile client must call this, so a snapshot can be
-	 * distributed to all active mobile clients.
+	 * Registers calling mobile client. Every mobile client must call this, so a snapshot can be distributed to all
+	 * active mobile clients.
 	 */
 	public void login(Integer clientID);
 
@@ -18,10 +18,13 @@ public interface MobileManagementRemote {
 
 	/**
 	 * Requests a new snapshot to be distributed to all mobile clients.
+	 * 
+	 * @return False, iff a snapshot has already been requested but not distributed. In this case the clients should try
+	 *         again later.
 	 */
-	public void requestSnapshot();
-	
+	public boolean requestSnapshot();
+
 	public void voteCommit(Integer clientID, Integer snapshotID, boolean vote);
-	
+
 	public void ackGlobalCommit(Integer clientID, Integer snapshotID, boolean vote);
 }
