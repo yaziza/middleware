@@ -7,6 +7,7 @@ package de.tud.in.middleware.businessLogic;
 import java.util.Random;
 
 import javax.ejb.MessageDriven;
+import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
 import javax.naming.Context;
@@ -47,9 +48,17 @@ public class EmployeeNativeClient extends javax.swing.JFrame implements
 	}
 
 	@Override
-	public void onMessage(Message arg0) {
-		// TODO Auto-generated method stub
-
+	public void onMessage(Message message) {
+		try {
+			if (message.getJMSType().equals(JNDINames.JMS_PREPARE)) {
+				mobileManagment.voteCommit(clientID, 0 , true);
+			} else if (message.getJMSType().equals(JNDINames.JMS_UPDATE)) {
+				mobileManagment.requestSnapshot();
+			}
+		} catch (JMSException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private void init() throws NamingException {
@@ -62,6 +71,7 @@ public class EmployeeNativeClient extends javax.swing.JFrame implements
 
 		orderManagementRemote = (OrderManagementRemote) context
 				.lookup(JNDINames.ORDER_NAME);
+
 		mobileManagment = (MobileManagementRemote) context
 				.lookup(JNDINames.SNAPSHOT_NAME);
 
