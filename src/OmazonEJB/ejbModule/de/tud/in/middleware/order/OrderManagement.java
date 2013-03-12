@@ -1,5 +1,6 @@
 package de.tud.in.middleware.order;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -36,6 +37,11 @@ public class OrderManagement implements OrderManagementRemote, OrderManagementLo
 	public void changeOrderState(final Integer orderId, final OrderState newState) {
 		orderDAO.changeOrderState(orderId, newState);
 	}
+	
+	@Override
+	public void changeOrderStateString(Integer orderId, String newState) {
+		orderDAO.changeOrderState(orderId, OrderState.getStateFromDescription(newState));
+	}
 
 	@Override
 	public OrderState getOrderState(final Integer orderId) {
@@ -46,6 +52,15 @@ public class OrderManagement implements OrderManagementRemote, OrderManagementLo
 	public String getOrderStateAsString(final Integer orderId) {
 		final OrderState state = getOrderState(orderId);
 		return state.toString();
+	}
+
+	@Override
+	public List<Integer> getOrders() {
+		List<Integer> orders = new ArrayList<Integer>();
+		for (CustomerOrder order : orderDAO.getOrders())
+			orders.add(order.getId());
+		
+		return orders;
 	}
 
 }

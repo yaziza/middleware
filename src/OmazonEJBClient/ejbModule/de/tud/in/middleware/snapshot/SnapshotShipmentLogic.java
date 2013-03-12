@@ -1,5 +1,6 @@
 package de.tud.in.middleware.snapshot;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import de.tud.in.middleware.order.CustomerOrder;
@@ -7,8 +8,9 @@ import de.tud.in.middleware.shipment.Shipment;
 import de.tud.in.middleware.shipment.ShipmentManagementRemote;
 import de.tud.in.middleware.shipment.ShipmentPosition;
 
-public final class SnapshotShipmentLogic implements ShipmentManagementRemote {
+public final class SnapshotShipmentLogic implements ShipmentManagementRemote, Serializable {
 
+	private static final long serialVersionUID = 5237569615680796350L;
 	private final Map<Integer, Shipment> shipmentMap;
 
 	public SnapshotShipmentLogic(final Map<Integer, Shipment> shipmentMap) {

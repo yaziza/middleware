@@ -74,7 +74,7 @@ public class ExceptionEventMessageDrivenBean implements MessageListener {
 	}
 
 	private void notifyClient(final int orderId, final String description) {
-		final Customer customer = entityManager.find(CustomerOrder.class, orderId).getCustomer();
+		final Customer customer = entityManager.find(CustomerOrder.class, orderId).getOwner();
 		final String msgStr = String.format("<H2>Dear %s </H2>There has been an exception with your order #%d.<br>%s",
 				customer.getName(), orderId, description);
 		MailHandler.sendMail(customer.getEMail(), "Omazon Order Exception", msgStr);

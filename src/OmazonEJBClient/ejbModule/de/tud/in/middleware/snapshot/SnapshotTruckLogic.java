@@ -1,5 +1,6 @@
 package de.tud.in.middleware.snapshot;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import de.tud.in.middleware.shipment.Shipment;
@@ -7,8 +8,9 @@ import de.tud.in.middleware.shipment.ShipmentPosition;
 import de.tud.in.middleware.shipment.Truck;
 import de.tud.in.middleware.shipment.TruckManagementRemote;
 
-public final class SnapshotTruckLogic implements TruckManagementRemote {
+public final class SnapshotTruckLogic implements TruckManagementRemote, Serializable {
 
+	private static final long serialVersionUID = -5873162471980344140L;
 	private final Map<Integer, Truck> truckMap;
 
 	public SnapshotTruckLogic(final Map<Integer, Truck> truckMap) {

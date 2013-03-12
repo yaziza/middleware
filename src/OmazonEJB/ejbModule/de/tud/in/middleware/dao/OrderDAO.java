@@ -66,7 +66,9 @@ public class OrderDAO {
 
 	@SuppressWarnings("unchecked")
 	public List<CustomerOrder> getOrders() {
-		final Query query = entityManager.createQuery("SELECT e FROM CustomerOrder e");
+		
+		final Query query;
+		query = entityManager.createQuery("SELECT e FROM CustomerOrder e");
 		return query.getResultList();
 	}
 }

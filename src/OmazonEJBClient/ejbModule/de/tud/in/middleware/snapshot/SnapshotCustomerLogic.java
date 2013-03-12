@@ -1,13 +1,15 @@
 package de.tud.in.middleware.snapshot;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 import de.tud.in.middleware.customers.Customer;
 import de.tud.in.middleware.customers.CustomerManagementRemote;
 
-public final class SnapshotCustomerLogic implements CustomerManagementRemote {
+public final class SnapshotCustomerLogic implements CustomerManagementRemote, Serializable {
 
+	private static final long serialVersionUID = 5920790029543783515L;
 	private final Map<Integer, Customer> customerMap;
 
 	public SnapshotCustomerLogic(final Map<Integer, Customer> customerMap) {

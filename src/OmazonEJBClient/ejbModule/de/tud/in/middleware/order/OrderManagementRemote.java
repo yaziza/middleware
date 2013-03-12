@@ -15,9 +15,13 @@ public interface OrderManagementRemote {
 	public Integer addOrderForCustomer(List<ProductInstance> products, Integer customerId);
 
 	public void changeOrderState(Integer orderId, OrderState newState);
+	
+	public void changeOrderStateString(Integer orderId, String newState);
 
 	public OrderState getOrderState(Integer orderId);
 
 	public String getOrderStateAsString(Integer orderId);
-
+	
+	public List<Integer> getOrders();
+	
 }

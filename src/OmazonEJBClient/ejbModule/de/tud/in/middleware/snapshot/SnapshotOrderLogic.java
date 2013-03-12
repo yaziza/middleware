@@ -1,5 +1,6 @@
 package de.tud.in.middleware.snapshot;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -8,8 +9,9 @@ import de.tud.in.middleware.order.OrderManagementRemote;
 import de.tud.in.middleware.order.OrderState;
 import de.tud.in.middleware.products.ProductInstance;
 
-public final class SnapshotOrderLogic implements OrderManagementRemote {
+public final class SnapshotOrderLogic implements OrderManagementRemote, Serializable {
 
+	private static final long serialVersionUID = -1513353957412326141L;
 	private final Map<Integer, CustomerOrder> orderMap;
 
 	public SnapshotOrderLogic(final Map<Integer, CustomerOrder> orderMap) {
@@ -40,6 +42,16 @@ public final class SnapshotOrderLogic implements OrderManagementRemote {
 	@Override
 	public String getOrderStateAsString(final Integer orderId) {
 		return getOrderState(orderId).toString();
+	}
+
+	@Override
+	public List<Integer> getOrders() {
+		throw new UnsupportedOperationException("Snapshot is read only.");
+	}
+
+	@Override
+	public void changeOrderStateString(Integer orderId, String newState) {
+		throw new UnsupportedOperationException("Snapshot is read only.");		
 	}
 
 }

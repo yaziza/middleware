@@ -14,4 +14,15 @@ public enum OrderState implements Serializable {
 		}
 		return super.toString();
 	}
+	
+	public static OrderState getStateFromDescription(String description) {
+		OrderState value = null;
+		
+		for (OrderState state : OrderState.values()){
+			if (description.equals(state.toString()))
+				return state;
+		}
+		
+		return value;
+	}
 }

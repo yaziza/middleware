@@ -18,8 +18,9 @@ import javax.naming.NamingException;
 
 import de.tud.in.middleware.customers.Customer;
 import de.tud.in.middleware.order.CustomerOrder;
-import de.tud.in.middleware.customers.CustomerManagementRemote;
+import de.tud.in.middleware.order.OrderState;
 import de.tud.in.middleware.order.OrderManagementRemote;
+import de.tud.in.middleware.customers.CustomerManagementRemote;
 import de.tud.in.middleware.products.Product;
 import de.tud.in.middleware.products.ProductManagementRemote;
 import de.tud.in.middleware.snapshot.MobileManagementRemote;
@@ -29,6 +30,7 @@ import de.tud.in.middleware.snapshot.Snapshot;
  * 
  * @author yasser
  */
+@SuppressWarnings("unused")
 @MessageDriven(mappedName = "jms/MobileClient")
 public class EmployeeNativeClient extends javax.swing.JFrame implements
 		MessageListener {
@@ -148,7 +150,10 @@ public class EmployeeNativeClient extends javax.swing.JFrame implements
 		orderStateLabel1 = new javax.swing.JLabel();
 		orderStateChoice = new java.awt.Choice();
 		orderIDchoice = new java.awt.Choice();
-
+		
+		for (OrderState order : OrderState.values()) 
+			orderStateChoice.addItem(order.toString());
+		
 		refreshContent();
 
 		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -511,10 +516,16 @@ public class EmployeeNativeClient extends javax.swing.JFrame implements
 		customers = customerManagementRemote.getCustomers();
 		for (Customer customer : customers)
 			customerIDchoice.addItem(customer.getName());
+
+		orders = orderManagementRemote.getOrders();
+		 for (Integer order : orders)
+			 orderIDchoice.addItem(order.toString());
 	}
 
 	private void orderStateButtonActionPerformed(java.awt.event.ActionEvent evt) {
-		// TODO add your handling code here:
+		Integer orderID = Integer.parseInt(orderIDchoice.getSelectedItem());
+		String state = orderStateChoice.getSelectedItem();
+		orderManagementRemote.changeOrderStateString(orderID, state);
 	}
 
 	private void addProductButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -555,7 +566,7 @@ public class EmployeeNativeClient extends javax.swing.JFrame implements
 		String selectedItem = customerIDchoice.getSelectedItem();
 		Integer customerID = getCustomerIDFromString(selectedItem);
 		customerManagementRemote.removeCustomer(customerID);
-		customerIDchoice.remove(selectedItem);	
+		customerIDchoice.remove(selectedItem);
 	}
 
 	private Integer getCustomerIDFromString(String selectedItem) {
@@ -625,9 +636,10 @@ public class EmployeeNativeClient extends javax.swing.JFrame implements
 	private ProductManagementRemote productManagementRemote;
 	private CustomerManagementRemote customerManagementRemote;
 	private OrderManagementRemote orderManagementRemote;
+
 	List<Product> products;
 	List<Customer> customers;
-	List<CustomerOrder> orders;
+	List<Integer> orders;
 	//
 
 	// Variables declaration - do not modify

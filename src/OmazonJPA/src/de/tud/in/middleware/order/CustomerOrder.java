@@ -47,7 +47,7 @@ public final class CustomerOrder implements Serializable {
 		return productInstances;
 	}
 
-	public Customer getCustomer() {
+	public Customer getOwner() {
 		return customer;
 	}
 

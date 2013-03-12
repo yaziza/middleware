@@ -1,5 +1,6 @@
 package de.tud.in.middleware.snapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -7,8 +8,9 @@ import java.util.Map;
 import de.tud.in.middleware.products.Product;
 import de.tud.in.middleware.products.ProductManagementRemote;
 
-public final class SnapshotProductLogic implements ProductManagementRemote {
+public final class SnapshotProductLogic implements ProductManagementRemote, Serializable {
 
+	private static final long serialVersionUID = -1009982729040259655L;
 	private final Map<Integer, Product> productMap;
 
 	public SnapshotProductLogic(final Map<Integer, Product> productMap) {
