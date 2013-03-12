@@ -83,10 +83,6 @@ public class CustomerDAO {
 	public void removeCustomer(final long id) {
 		final Customer customer = entityManager.find(Customer.class, (int) id);
 
-		if (customer == null) {
-			return;
-		}
-
 		entityManager.remove(customer);
 		entityManager.flush();
 	}

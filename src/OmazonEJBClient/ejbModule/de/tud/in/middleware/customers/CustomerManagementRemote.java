@@ -1,5 +1,7 @@
 package de.tud.in.middleware.customers;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 
 @Remote
@@ -14,5 +16,7 @@ public interface CustomerManagementRemote {
 	public void changeCustomerName(Integer id, String name);
 
 	public void removeCustomer(Integer id);
-
+	
+	public List<Customer> getCustomers();
+	
 }

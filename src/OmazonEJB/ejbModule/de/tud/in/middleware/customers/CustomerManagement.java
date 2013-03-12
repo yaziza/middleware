@@ -1,5 +1,7 @@
 package de.tud.in.middleware.customers;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -44,5 +46,10 @@ public class CustomerManagement implements CustomerManagementRemote, CustomerMan
 	@Override
 	public void removeCustomer(final Integer id) {
 		customerDAO.removeCustomer(id);
+	}
+
+	@Override
+	public List<Customer> getCustomers() {
+		return customerDAO.getCustomers();
 	}
 }

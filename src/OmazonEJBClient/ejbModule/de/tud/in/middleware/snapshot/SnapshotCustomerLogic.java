@@ -1,5 +1,6 @@
 package de.tud.in.middleware.snapshot;
 
+import java.util.List;
 import java.util.Map;
 
 import de.tud.in.middleware.customers.Customer;
@@ -44,6 +45,11 @@ public final class SnapshotCustomerLogic implements CustomerManagementRemote {
 	 */
 	@Override
 	public void removeCustomer(final Integer id) {
+		throw new UnsupportedOperationException("Snapshot is read only.");
+	}
+
+	@Override
+	public List<Customer> getCustomers() {
 		throw new UnsupportedOperationException("Snapshot is read only.");
 	}
 
