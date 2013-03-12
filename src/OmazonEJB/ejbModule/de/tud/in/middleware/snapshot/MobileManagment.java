@@ -90,7 +90,8 @@ public class MobileManagment implements MobileManagementRemote {
 					try {
 						sleep(ClientSessionSet.TIMEOUT_LIMIT_MILIS);
 						synchronized (mobileClients) {
-							if (votedCommit == null || votedCommit.snapshotID != id) {
+							if (votedCommit == null
+									|| votedCommit.snapshotID != id) {
 								return;
 							}
 							checkVote();
@@ -120,7 +121,8 @@ public class MobileManagment implements MobileManagementRemote {
 					try {
 						sleep(ClientSessionSet.TIMEOUT_LIMIT_MILIS);
 						synchronized (mobileClients) {
-							if (acknowledgedCommit == null || acknowledgedCommit.snapshotID != id) {
+							if (acknowledgedCommit == null
+									|| acknowledgedCommit.snapshotID != id) {
 								return;
 							}
 							checkGlobalAcks();
@@ -141,14 +143,17 @@ public class MobileManagment implements MobileManagementRemote {
 		}.start();
 	}
 
-	private void sendToAllClients(final Serializable msgObj, final String msgType) {
+	private void sendToAllClients(final Serializable msgObj,
+			final String msgType) {
 		try {
 			final Connection conn = connectionFactory.createConnection();
-			final Session session = conn.createSession(false, Session.AUTO_ACKNOWLEDGE);
+			final Session session = conn.createSession(false,
+					Session.AUTO_ACKNOWLEDGE);
 			final Message msg = session.createObjectMessage(msgObj);
 			msg.setJMSType(msgType);
 
-			final MessageProducer producer = session.createProducer(clientMsgQueue);
+			final MessageProducer producer = session
+					.createProducer(clientMsgQueue);
 			producer.send(msg);
 		} catch (final JMSException e) {
 			// TODO Auto-generated catch block
@@ -168,7 +173,8 @@ public class MobileManagment implements MobileManagementRemote {
 	}
 
 	@Override
-	public synchronized void voteCommit(final Integer clientID, final Integer snapshotID, final boolean vote) {
+	public synchronized void voteCommit(final Integer clientID,
+			final Integer snapshotID, final boolean vote) {
 		if (votedCommit == null || votedCommit.snapshotID != snapshotID) {
 			System.out.println("Ignored vote.");
 			return;
@@ -177,8 +183,10 @@ public class MobileManagment implements MobileManagementRemote {
 			votedCommit.addClient(clientID);
 			if (votedCommit.complete()) {
 				System.out.println("Voting successful.");
-				acknowledgedCommit = new ClientSessionSet(mobileClients.size(), snapshotID);
-				sendToAllClients(snapshotID, MobileManagementRemote.UPDATE_MSG_TYPE);
+				acknowledgedCommit = new ClientSessionSet(mobileClients.size(),
+						snapshotID);
+				sendToAllClients(snapshotID,
+						MobileManagementRemote.UPDATE_MSG_TYPE);
 				startAckTimeout(snapshotID);
 			}
 		} else {
@@ -195,8 +203,10 @@ public class MobileManagment implements MobileManagementRemote {
 	}
 
 	@Override
-	public synchronized void ackGlobalCommit(final Integer clientID, final Integer snapshotID, final boolean ack) {
-		if (acknowledgedCommit == null || acknowledgedCommit.snapshotID != snapshotID) {
+	public synchronized void ackGlobalCommit(final Integer clientID,
+			final Integer snapshotID, final boolean ack) {
+		if (acknowledgedCommit == null
+				|| acknowledgedCommit.snapshotID != snapshotID) {
 			System.out.println("Ignored acknowledgement.");
 			return;
 		}

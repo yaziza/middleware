@@ -7,6 +7,11 @@ package de.tud.in.middleware.businessLogic;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ejb.MessageDriven;
+import javax.jms.JMSException;
+import javax.jms.Message;
+import javax.jms.MessageListener;
+import javax.jms.ObjectMessage;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -15,12 +20,15 @@ import de.tud.in.middleware.order.OrderManagementRemote;
 import de.tud.in.middleware.products.Product;
 import de.tud.in.middleware.products.ProductInstance;
 import de.tud.in.middleware.products.ProductManagementRemote;
+import de.tud.in.middleware.snapshot.MobileManagementRemote;
 
 /**
  * 
  * @author yasser
  */
-public class CustomerNativeClient extends javax.swing.JFrame {
+@MessageDriven(mappedName = "jms/MobileClient")
+public class CustomerNativeClient extends javax.swing.JFrame implements
+		MessageListener {
 
 	private static final long serialVersionUID = -308256521610779734L;
 
@@ -44,6 +52,34 @@ public class CustomerNativeClient extends javax.swing.JFrame {
 				.lookup(JNDINames.ORDER_NAME);
 
 		products = productManagementRemote.getProducts();
+	}
+
+	@Override
+	public void onMessage(Message message) {
+		if (!(message instanceof ObjectMessage)) {
+			System.err.println("Unknown message object in MobileClient queue.");
+			return;
+		}
+
+		try {
+			if (message.getJMSType().equals(
+					MobileManagementRemote.UPDATE_MSG_TYPE)) {
+				products = productManagementRemote.getProducts();
+				productChoice.removeAll();
+				for (Product item : products)
+					productChoice.addItem(item.getDescription());
+
+				initComponents();
+				System.out.println("update notification");
+
+			} else {
+				System.err
+						.println("Unknown message type in MobileClient queue.");
+				return;
+			}
+		} catch (JMSException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -241,7 +277,7 @@ public class CustomerNativeClient extends javax.swing.JFrame {
 
 		orderedProducts.add(productInstance);
 		quantityTextField.setText("");
-		
+
 		orderButton.setEnabled(true);
 	}
 

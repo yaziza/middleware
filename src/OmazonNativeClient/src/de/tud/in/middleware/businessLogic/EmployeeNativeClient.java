@@ -80,7 +80,7 @@ public class EmployeeNativeClient extends javax.swing.JFrame implements
 
 	private void handleUpdateToSnapshot(Integer snapId) {
 		Snapshot snap = preparedSnapshots.getSnapshot(snapId);
-		if(snap != null){
+		if(snap != null){   
 			currentSnapshot = snap;
 			mobileManagment.ackGlobalCommit(clientID, snapId, true);
 		}else{
@@ -103,6 +103,7 @@ public class EmployeeNativeClient extends javax.swing.JFrame implements
 				.lookup(JNDINames.SNAPSHOT_NAME);
 
 		mobileManagment.login(clientID);
+		mobileManagment.requestSnapshot();
 	}
 
 	/**
